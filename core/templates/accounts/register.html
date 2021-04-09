@@ -23,7 +23,7 @@
                                     {% if msg %}
                                         {{ msg | safe }}
                                     {% else %}
-                                        Add your credentials
+                                    Saisir votre code client et votre mot de passe pour vous connecter ou inscrivez vous çi c'est votre première connexion 
                                     {% endif %}                                     
                                 </p> 
                             </div>
@@ -34,7 +34,8 @@
 
                                 <!-- Form -->
                                 <div class="form-group mb-4">
-                                    <label for="email">Username</label>
+                                    <label for="email">
+                                        Nom d'utilisateur</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-shield"></span></span>
                                         {{ form.username }}
@@ -44,7 +45,7 @@
 
                                 <!-- Form -->
                                 <div class="form-group mb-4">
-                                    <label for="email">Your Email</label>
+                                    <label for="email">Email</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon3"><span class="fas fa-envelope"></span></span>
                                         {{ form.email }}
@@ -58,7 +59,7 @@
 
                                     <!-- Form -->
                                     <div class="form-group mb-4">
-                                        <label for="password">Your Password</label>
+                                        <label for="password">Mot de passe</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon4"><span class="fas fa-unlock-alt"></span></span>
                                             {{ form.password1 }}
@@ -69,7 +70,7 @@
 
                                     <!-- Form -->
                                     <div class="form-group mb-4">
-                                        <label for="password">Password Check</label>
+                                        <label for="password">Vérification de mot de passe</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon4"><span class="fas fa-unlock-alt"></span></span>
                                             {{ form.password2 }}
