@@ -1,15 +1,317 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} UI Notifications {% endblock %} 
+{% block title %} Dashboard {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link href="style.css" rel="stylesheet"> 
+  <style>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background: #fdfdff;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(1, 160px);
+  grid-gap: 80px;
+  margin: auto 0;
+}
+
+@media (min-width: 420px) and (max-width: 659px) {
+  .container {
+    grid-template-columns: repeat(2, 160px);
+  }
+}
+
+@media (min-width: 660px) and (max-width: 899px) {
+  .container {
+    grid-template-columns: repeat(3, 160px);
+  }
+}
+
+@media (min-width: 900px) {
+  .container {
+    grid-template-columns: repeat(4, 160px);
+  }
+}
+
+.container .box {
+  width: 100%;
+}
+
+.container .box h2 {
+  display: block;
+  text-align: center;
+  color: rgb(14, 12, 12);
+}
+
+.container .box .chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 40px;
+  line-height: 160px;
+  height: 140px;
+  color: rgb(15, 14, 14);
+}
+
+.container .box canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  width: 100%;
+}
+
+</style>
+</head>
+
+<body>
+
+
+    <!--image banque -->
+    <img src="/static/assets/img/team/1.jpg" alt="banque" width="1400" height="400">
+    <br> <br> <br>
 
 
 
-{% endblock content %}
 
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+<div class="row">
+  <div class="column" ,>
+
+    
+    <h2>Nombres des clients</h2>
+                    
+    <div class="chart-responsive" style="width:50%">
+        <canvas id="pieChart" height="20"></canvas>
+  </div>
+<div class="chart-responsive" style="width:60%">
+        <canvas id="doughnutChart" height="150"></canvas>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
+<script>
+  var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
+  var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+  var pieData        = {
+    labels: [
+    'Hommes', 
+    'Femmes',
+    
+    ],
+    datasets: [
+  {
+    data: [700,500],
+    backgroundColor : ['#f56954', '#00a65a'],
+  }
+    ]
+  }
+  var pieOptions     = {
+    legend: {
+  display: false
+    }
+  }
+  //Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+
+  var pieChart = new Chart(doughnutChartCanvas, {
+    type: 'pie',
+    data: pieData,
+    options: pieOptions      
+  })
+</script>
+  </div>
+  
+  <div class="column" ;>
+    <h2>Etats des transactions</h2>
+
+    <br> <br>
+   	
+<div class="container">
+    <div class="box">
+      <div class="chart" data-percent="73" data-scale-color="#ffb400">73%</div>
+ <br><br>      <h3><p><b>Frauduleuse</b></p></h3> 
+    </div>
+    <div class="box">
+      <div class="chart" data-percent="90" data-scale-color="#ffb400">90%</div>
+      <br><br>
+      <h3><p><b>Non Frauduleuse</b></p></h3> 
+    </div>
+ 
+  </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js" integrity="sha512-DHNepbIus9t4e6YoMBSJLwl+nnm0tIwMBonsQQ+W9NKN6gVVVbomJs9Ii3mQ+HzGZiU5FyJLdnAz9a63ZgZvTQ==" crossorigin="anonymous"></script>
+  <script type="text/javascript" > 
+      $(function() {
+        $('.chart').easyPieChart({
+          size: 160,
+          barColor: "#17d3e6",
+          scaleLength: 0,
+          lineWidth: 15,
+          trackColor: "#373737",
+          lineCap: "circle",
+          animate: 2000,
+        });
+      });
+  </script>
+  </div>
+
+
+</div>
+
+<br> <br>
+<!-- end row-->
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    
+    
+    <h3><b>Liste des clients</b></h3><br>  
+   
+</div>
+
+  <div class="card card-body shadow-sm table-wrapper table-responsive">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                  <th>Numéro </th>
+                  <th>Nom de client</th>						
+                  <th>Prénom de client</th>
+                  <th>Date de l'opération</th>
+                  <th></th>
+            
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Item -->
+              <tr>
+                  <td>                     
+                     1                    
+                  </td>
+                  <td>
+                      <span class="fw-normal">Platinum Subscription Plan</span>
+                  </td>
+                  <td><span class="fw-normal">xxx</span></td>                        
+                  <td><span class="fw-normal">1 Jun 2020</span></td>
+                  <td>
+                  <button type="button" class="btn btn-success">Valider</button>
+                   <button type="button" class="btn btn-danger">Refuser</button>
+                 </td>
+                 
+              </tr>
+              <!-- Item -->
+              <tr>
+                  <td>
+                      <a href="#" class="fw-bold">
+                        2
+                      </a>
+                  </td>
+                  <td>
+                      <span class="fw-normal">Platinum Subscription Plan</span>
+                  </td>
+                  <td><span class="fw-normal">yyy</span></td>                        
+                  <td><span class="fw-normal">1 May 2020</span></td>
+                  <td>
+                    <button type="button" class="btn btn-success">Valider</button>
+                     <button type="button" class="btn btn-danger">Refuser</button>
+                   </td>
+              </tr> 
+      
+              <!-- Item -->
+              <tr>
+                  <td>
+                      <a href="#" class="fw-bold">
+                        3
+                      </a>
+                  </td>
+                  <td>
+                      <span class="fw-normal">Platinum Subscription Plan</span>
+                  </td>
+                  <td><span class="fw-normal">zzz</span></td>                        
+                  <td><span class="fw-normal">1 Feb 2020</span></td>
+                  <td>
+                    <button type="button" class="btn btn-success">Valider</button>
+                     <button type="button" class="btn btn-danger">Refuser</button>
+                   </td>
+              </tr> 
+                            
+          </tbody>
+
+      </table>
+
+      <div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
+          <nav aria-label="Page navigation example">
+              <ul class="pagination mb-0">
+                  <li class="page-item">
+                      <a class="page-link" href="#">Previous</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item active">
+                      <a class="page-link" href="#">2</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="#">4</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="#">5</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="fw-bold small d-none d-lg-block">Showing <b>3</b> out of <b>25</b> entries</div>
+      </div>
+  </div>
+
+   
+    </body>
+    </html>
+    
+    {% endblock content %}
+    
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
+    
+    

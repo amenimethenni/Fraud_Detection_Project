@@ -5,8 +5,8 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from django.template import loader
-from django.http import HttpResponse
+from django.template import loader # charge la template 
+from django.http import HttpResponse #la classe HttpResponse gére les requetes HTTP
 from django import template
 
 @login_required(login_url="/login/")
@@ -15,8 +15,8 @@ def index(request):
     context = {}
     context['segment'] = 'index'
 
-    html_template = loader.get_template( 'index.html' )
-    return HttpResponse(html_template.render(context, request))
+    html_template = loader.get_template( 'index.html' ) #le fichier index.html existe sous template
+    return HttpResponse(html_template.render(context, request)) #html_template.render(: le rendu de l'objet template qui est crée par le module loader 
 
 @login_required(login_url="/login/")
 def pages(request):

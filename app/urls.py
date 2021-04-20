@@ -4,7 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.urls import path, re_path
-from app import views
+from app import views # import de fich view qui existe dans app
 
 urlpatterns = [
 
@@ -13,6 +13,7 @@ urlpatterns = [
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
+
 
 
 ]

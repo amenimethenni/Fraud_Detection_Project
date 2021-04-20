@@ -7,21 +7,18 @@
 
 {% block content %}
 
-
-
-
     <main>
         <!-- Section -->
         <section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
             <div class="container">
                      
-                <img src="/static/assets/img/team/10.jpg" alt="banque" width="1300" height="400"><br>
+                <img src="/static/assets/img/team/10.jpg" alt="banque" width="1300" height="400"><br><br><br>
             
                 <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
                                 <h1 class="mb-0 h3">
-                                    Se connecter
+                                    <b>Se connecter</b>
 
                                 </h1>
                                 <br />
@@ -40,7 +37,7 @@
 
                                 <!-- Form -->
                                 <div class="form-group mb-4">
-                                    <label for="email">Code client</label>
+                                    <label for="email">Nom d'utilisateur</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1"><span class="fas fa-user-circle"></span></span>
                                         {{ form.username }}
@@ -65,12 +62,12 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <a href="{% url 'register' %}" class="small text-right">S'inscrire</a>
+                                            <a href="{% url 'register' %}" class="small text-right"><b>S'inscrire içi</b></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" name="login" class="btn btn-dark">Sign in</button>
+                                    <button type="submit" name="login" class="btn btn-dark">Se connecter</button>
                                 </div>
                             </form>
 
