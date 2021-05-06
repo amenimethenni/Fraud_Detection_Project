@@ -39,6 +39,7 @@ def Preprocessing(df):
     return df
 
 new_df = Preprocessing(df)
+new_df['user_id'] = 1
 print(new_df.info())
 print (new_df.head(10))
 
@@ -50,25 +51,19 @@ conn = mysql.connector.connect(
   database="frauddetection"
 )
 cursor = conn.cursor()
-all_value = []
-query = "INSERT INTO  frauddetection.transactions_transaction(amt,category,hours,dob,month,gender,unix_time, year,day,city_pop,merchant,is_fraud)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-for row in new_df.itertuples():    
-    amt = row.amt
-    category = row.category
-    hours = row.hours
-    dob = row.dob
-    month = row.month
-    gender = row.gender
-    unix_time = row.unix_time
-    year = row.year
-    day = row.day
-    city_pop = row.city_pop
-    merchant = row.merchant
-    is_fraud = row.is_fraud
-    value = (amt,category,hours,dob,month,gender,unix_time, year,day,city_pop,merchant,is_fraud) 
-    all_value.append(value)    
-cursor.executemany(query, all_value)
-conn.commit()
+
+# creating column list for insertion
+cols = "`,`".join([str(i) for i in new_df.columns.tolist()])
+
+# Insert DataFrame recrds one by one.
+for i,row in new_df.iterrows():
+    sql = "INSERT INTO `transactions_transaction` (`" +cols + "`) VALUES (" + "%s,"*(len(row)-1) + "%s)"
+    cursor.execute(sql, tuple(row))
+
+# the connection is not autocommitted by default, so we must commit to save our changes
+connection.commit()
+
+
 
 
 

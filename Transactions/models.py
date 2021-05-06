@@ -22,6 +22,6 @@ class Transaction(models.Model):
     hours = models.IntegerField(null=True)
 
     category_pred = models.CharField(max_length = 100, null=True )
-    is_fraud_pred = models.IntegerField()
-    liste_etats= (('En cours' , 'En cours'),('En traitement' , 'En traitement'), ('Traitée' , 'Traitée'))
+    is_fraud_pred = models.IntegerField(null=True)
+    liste_etats= (('En traitement' , 'En traitement'), ('Traitée' , 'Traitée'))
     etat = models.CharField(max_length = 100, null=True , choices = liste_etats )
