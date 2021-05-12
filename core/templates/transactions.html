@@ -6,155 +6,53 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-<img src="/static/assets/img/team/1.jpg" alt="banque" width="1400" height="400">
+<img src="/static/assets/img/team/11.png" alt="banque" width="1300" height="250"><br>
 
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
     
     
-    <h3><b>Historique des opérations</b></h3><br>  
+   
    
 </div>
 
   <div class="card card-body shadow-sm table-wrapper table-responsive">
+    <div class="card-header card-header-primary">
+        <p class="card-category"><h3 style="color:rgba(9, 5, 116, 0.904)">Liste des transactions</h3>
+    </div>
       <table class="table table-hover">
-          <thead>
+
+          <thead bgcolor="lightgray">
               <tr>
-                  <th>Numéro</th>
-                  <th>Libellé opération</th>						
-                  <th>numéro de compte</th>
-                  <th>Date de l'opération</th>
-                  <th>Montant</th>
-                  <th>Status</th>
+                  
+                  <th>Date transaction</th>
+                  <th>marchand</th>	
+                  <th>categorie</th>				
+                  <th>Montant</th>                 
+                  <th>Etat</th>
                   <th>Frauduleuse</th>
               </tr>
           </thead>
           <tbody>
-              <!-- Item -->
-              <tr>
-                  <td>                     
-                     1                    
-                  </td>
-                  <td>
-                      <span class="fw-normal">Platinum Subscription Plan</span>
-                  </td>
-                  <td><span class="fw-normal">1 May 2020</span></td>                        
-                  <td><span class="fw-normal">1 Jun 2020</span></td>
-                  <td><span class="fw-bold">$799,00</span></td>
-                  <td><span class="fw-bold text-warning">resultat Algo ML</span></td>
-                  <td>
-                    <input type="checkbox">
-                 </td>
-              </tr>
-              <!-- Item -->
-              <tr>
-                  <td>
-                      <a href="#" class="fw-bold">
-                        2
-                      </a>
-                  </td>
-                  <td>
-                      <span class="fw-normal">Platinum Subscription Plan</span>
-                  </td>
-                  <td><span class="fw-normal">1 Apr 2020</span></td>                        
-                  <td><span class="fw-normal">1 May 2020</span></td>
-                  <td><span class="fw-bold">$799,00</span></td>
-                  <td><span class="fw-bold text-danger">Frauduleuse</span></td>             
-                   <td>
-                    <input type="checkbox">
+        
+            {% for i in listetransactions %}
 
-                  </td>
-              </tr> 
-              <!-- Item -->
-              <tr>
-                  <td>
-                      <a href="#" class="fw-bold">
-                          3
-                      </a>
-                  </td>
-                  <td>
-                      <span class="fw-normal">Platinum Subscription Plan</span>
-                  </td>
-                  <td><span class="fw-normal">1 Mar 2020</span></td>                        
-                  <td><span class="fw-normal">1 Apr 2020</span></td>
-                  <td><span class="fw-bold">$799,00</span></td>
-                  <td><span class="fw-bold text-success">non frauduleuse</span></td>
-                  <td>
-                    <input type="checkbox">
-                 </td>
-              </tr> 
-              <!-- Item -->
-              <tr>
-                  <td>
-                      <a href="#" class="fw-bold">
-                          4
-                      </a>
-                  </td>
-                  <td>
-                      <span class="fw-normal">Platinum Subscription Plan</span>
-                  </td>
-                  <td><span class="fw-normal">1 Feb 2020</span></td>                        
-                  <td><span class="fw-normal">1 Mar 2020</span></td>
-                  <td><span class="fw-bold">$799,00</span></td>
-                  <td><span class="fw-bold text-success">non frauduleuse</span></td>
-                  <td>
-                    <input type="checkbox">
-                  </td>
-              </tr> 
-              <!-- Item -->
-              <tr>
-                  <td>
-                      <a href="#" class="fw-bold">
-                        5
-                      </a>
-                  </td>
-                  <td>
-                      <span class="fw-normal">Platinum Subscription Plan</span>
-                  </td>
-                  <td><span class="fw-normal">1 Jan 2020</span></td>                        
-                  <td><span class="fw-normal">1 Feb 2020</span></td>
-                  <td><span class="fw-bold">$799,00</span></td>
-                  <td><span class="fw-bold text-danger">Frauduleuse</span></td>                 
-                   <td>
-                    <input type="checkbox">
-                  </td>
-              </tr> 
-    
- 
- 
-                                    
+            <tr>
+                 
+                  <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
+                  <td>{{i.merchant}} </td>     
+                  <td>{{i.category}}   </td> 
+                  <td> {{i.amt}} </td>  
+                  </td><td>
+                  <td><input type="checkbox"></td>
+            </tr>
+
+            {% endfor %}
+                
           </tbody>
-
-
-
-
       </table>
+
       <div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
-          <nav aria-label="Page navigation example">
-              <ul class="pagination mb-0">
-                  <li class="page-item">
-                      <a class="page-link" href="#">Previous</a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item active">
-                      <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="#">5</a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="#">Next</a>
-                  </li>
-              </ul>
-          </nav>
-          <div class="fw-bold small d-none d-lg-block">Showing <b>5</b> out of <b>25</b> entries</div>
+
       </div>
   </div>
 

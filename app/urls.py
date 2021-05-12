@@ -2,6 +2,8 @@
 from django.urls import path, re_path
 from app import views # import de fich view qui existe dans app
 
+#from django.urls import path, include  # add this
+
 
 #Liste des urls
 urlpatterns = [
@@ -12,6 +14,9 @@ urlpatterns = [
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
+
+    #path('transations/',include('transactiions.urls')),
+
 
  
 
