@@ -15,7 +15,6 @@ urlpatterns = [
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
 
-    #path('transations/',include('transactiions.urls')),
 
 
  

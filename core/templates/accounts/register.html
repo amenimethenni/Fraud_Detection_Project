@@ -16,14 +16,13 @@
                         <div class="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
                                 <h1 class="mb-0 h3">
-                                  S'inscrire
+                                    Sign UP
                                 </h1>
                                 <br />
                                 <p>
                                     {% if msg %}
                                         {{ msg | safe }}
                                     {% else %}
-                                    Saisir votre code client et votre mot de passe pour vous connecter ou inscrivez vous çi c'est votre première connexion 
                                     {% endif %}                                     
                                 </p> 
                             </div>
@@ -35,7 +34,7 @@
                                 <!-- Form -->
                                 <div class="form-group mb-4">
                                     <label for="email">
-                                        Nom d'utilisateur</label>
+                                        Username</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-shield"></span></span>
                                         {{ form.username }}
@@ -59,7 +58,7 @@
 
                                     <!-- Form -->
                                     <div class="form-group mb-4">
-                                        <label for="password">Mot de passe</label>
+                                        <label for="password">Password</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon4"><span class="fas fa-unlock-alt"></span></span>
                                             {{ form.password1 }}
@@ -70,7 +69,7 @@
 
                                     <!-- Form -->
                                     <div class="form-group mb-4">
-                                        <label for="password">Vérification de mot de passe</label>
+                                        <label for="password">Password Check</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon4"><span class="fas fa-unlock-alt"></span></span>
                                             {{ form.password2 }}
@@ -78,21 +77,10 @@
                                         <span class="text-error">{{ form.password2.errors }}</span>
                                     </div>
                                     <!-- End of Form -->                                    
-
-                                    <div class="d-flex justify-content-between align-items-top mb-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="remember">
-                                            <label class="form-check-label mb-0" for="remember">
-                                                Accepter les conditions
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <a href="{% url 'login' %}" class="small text-right"><b>Se connecter</b></a>
-                                        </div>
-                                    </div>                                  
+                              
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" name="register" class="btn btn-dark">S'inscrire</button>
+                                    <button type="submit" name="register" class="btn btn-dark">Sign up</button>
                                 </div>
                             </form>
 

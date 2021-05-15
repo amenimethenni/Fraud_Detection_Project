@@ -29,7 +29,7 @@
                   <th>categorie</th>				
                   <th>Montant</th>                 
                   <th>Etat</th>
-                  <th>Frauduleuse</th>
+                  <th>Action</th>
               </tr>
           </thead>
           <tbody>
@@ -38,15 +38,51 @@
 
             <tr>
                  
-                  <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
-                  <td>{{i.merchant}} </td>     
-                  <td>{{i.category}}   </td> 
-                  <td> {{i.amt}} </td>  
-                  </td><td>
-                  <td><input type="checkbox"></td>
-            </tr>
+              <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
+              <td>{{i.merchant}} </td>   
 
-            {% endfor %}
+              {% if i.category != None  %}
+                 
+              <td>
+              {{i.category}}
+              </td>
+
+              {% elif i.category == None  and  category_pred != None %}
+              <td>
+                {{i.category_pred}}
+              </td>
+            
+            {% endif %}      
+
+                         
+              <td> {{i.amt}} </td>  
+              
+            {% if i.is_fraud == 0 %}
+              <td>
+                    <p style="color:rgba(60, 179, 113)"><b>Non Frauduleuse</b></p>
+              </td>
+              {% elif i.is_fraud == 1  %}
+                 
+              <td>
+                <p style="color:rgba(224, 15, 68, 0.534)"><b>Frauduleuse</b></p>
+              </td>
+
+              {% elif i.is_fraud_pred == 0  and  i.is_fraud == none %}
+              <td>
+                    <p style="color:rgba(60, 179, 113)"><b>Non Frauduleuse</b></p>
+              </td>
+              {% elif  i.is_fraud_pred == 1 and i.is_fraud == none %}
+                 
+              <td>
+                <p style="color:rgba(224, 15, 68, 0.534)"><b>Frauduleuse</b></p>
+              </td>
+            {% endif %}      
+
+              <td><input type="checkbox"></td>
+          </tr>
+
+          {% endfor %}
+                
                 
           </tbody>
       </table>

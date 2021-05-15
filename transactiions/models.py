@@ -23,5 +23,6 @@ class Transactiions(models.Model):
 
     category_pred = models.CharField(max_length = 100, null=True )
     is_fraud_pred = models.IntegerField(null=True)
-    liste_etats= (('En traitement' , 'En traitement'), ('Traitée' , 'Traitée'))
-    etat = models.CharField(max_length = 100, null=True , choices = liste_etats )
+    #liste_etats= (('En traitement' , 'En traitement'), ('Traitée' , 'Traitée'))
+    #etat = models.CharField(max_length = 100, null=True , choices = liste_etats )
+    #Status = models.CharField(max_length = 100, null=True )

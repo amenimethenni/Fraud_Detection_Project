@@ -8,5 +8,4 @@ urlpatterns = [
     path("", include("authentication.urls")), # Auth routes - login / register
     path("", include("app.urls"))      ,       # UI Kits Html files
     path('transations/',include('transactiions.urls')),
-
 ]

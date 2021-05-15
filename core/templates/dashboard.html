@@ -19,11 +19,10 @@
 
 <!--image banque -->
 <img src="/static/assets/img/team/11.png" alt="banque" width="1300" height="250"><br>
-<br> <br> <br>
-
+<br> 
 
  <!--customer , revenue , trafic share-->
-  <h3><b>Mes rapports</b></h3><br>      
+  <h3><b></b></h3><br>      
   <div class="row justify-content-md-center">
  
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
@@ -33,14 +32,14 @@
                         <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                             <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><span class="fas fa-chart-line"></span></div>
                             <div class="d-sm-none">
-                                <h2 class="h5">Customers</h2>
+                                <h2 class="h5">dépenses</h2>
                                 <h3 class="mb-1">345,678</h3>
                             </div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
-                                <h2 class="h5">Customers</h2>
-                                <h3 class="mb-1">345k</h3>
+                                <h2 class="h5">Mes dépenses</h2>
+                                <h3 class="mb-1">345 TND</h3>
                             </div>
                             <small>Feb 1 - Apr 1,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> WorldWide</small> 
                             <div class="small mt-2">                               
@@ -65,8 +64,8 @@
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
-                                <h2 class="h5">Revenue</h2>
-                                <h3 class="mb-1">$43,594</h3>
+                                <h2 class="h5">Mes Revenues</h2>
+                                <h3 class="mb-1">43,594 TND</h3>
                             </div>
                             <small>Feb 1 - Apr 1,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Worldwide</small>
                             <div class="small mt-2">                               
@@ -86,10 +85,9 @@
                             <div class="ct-chart-traffic-share ct-golden-section ct-series-a"></div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
-                            <h2 class="h5 mb-3">Traffic Share</h2>
-                            <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-secondary me-1"><span class="fas fa-desktop"></span></span> Desktop <a href="#" class="h6">60%</a></h6>
-                            <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-primary me-1"><span class="fas fa-mobile-alt"></span></span> Mobile Web <a href="#" class="h6">30%</a></h6>
-                            <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-tertiary me-1"><span class="fas fa-tablet-alt"></span></span> Tablet Web <a href="#" class="h6">10%</a></h6>
+                            <h3 class="h5 mb-3">Restant Mois précédent</h3>
+                            <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-secondary me-1"><span class="fas fa-money"></span></span> 0 <a href="#" class="h6">TND</a></h6>
+                            <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-primary me-1"></span></span> 3-05-2021<a href="#" class="h6"></a></h6>
                         </div>
                     </div>
                 </div>
@@ -98,114 +96,88 @@
         
         <!--courbe sales values -->
 
-        <div class="col-12 mb-4">
-            <div class="card bg-secondary-alt shadow-sm">
-                <div class="card-header d-sm-flex flex-row align-items-center flex-0">
-                    <div class="d-block mb-3 mb-sm-0">
-                        <div class="h5 fw-normal mb-2">Sales Value</div>
-                        <h2 class="h3">$10,567</h2>
-                        <div class="small mt-2"> 
-                            <span class="fw-bold me-2">Yesterday</span>                              
-                            <span class="fas fa-angle-up text-success"></span>                                   
-                            <span class="text-success fw-bold">10.57%</span>
-                        </div>
-                    </div>
-                    <div class="d-flex ms-auto">
-                        <a href="#" class="btn btn-secondary text-dark btn-sm me-2">Month</a>
-                        <a href="#" class="btn btn-dark btn-sm me-3">Week</a>
-                    </div>
-                </div>
-                <div class="card-body p-2">
-                    <div class="ct-chart-sales-value ct-double-octave ct-series-g"></div>
-                </div>
-            </div>
-        </div>
+       
       
     <!--pie chart -->
-    <h3><b>Mes catégories</b></h3><br>
-    </div>
-    <div class="row">
-        <div class="col-12 col-xl-8 mb-4">
-
-	<div class="chart-responsive" style="width:50%">
-        <canvas id="pieChart" height="400"></canvas>
-  </div>
-<div class="chart-responsive" style="width:30%">
-        <canvas id="doughnutChart" height="150"></canvas>
-  </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
-<script>
-  var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
-  var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-  var pieData        = {
-    labels: [
-    'Chrome', 
-    'IE',
-    'FireFox', 
-    'Safari', 
-    'Opera', 
-    'Navigator', 
-    ],
-    datasets: [
-  {
-    data: [700,500,400,600,300,100],
-    backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-  }
-    ]
-  }
-  var pieOptions     = {
-    legend: {
-  display: false
-    }
-  }
-  //Create pie or douhnut chart
-  // You can switch between pie and douhnut using the method below.
-  var pieChart = new Chart(pieChartCanvas, {
-    type: 'doughnut',
-    data: pieData,
-    options: pieOptions      
-  })
-</script>                     
-
-    </div>   
     
-      <!--total orders-->
+    
+    <div class="row">
+        <div class="col-sm-4" >
+          
+            
+            <h3><b>Mes catégories</b></h3><br><br>
+            <div class="chart-responsive" style="width:70%">
+                <canvas id="pieChart" height="900" ></canvas>
+          </div>
+        <div class="chart-responsive" style="width:70%">
+                <canvas id="doughnutChart" height="350"></canvas>
+          </div>
+  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
+      <script>
+          var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
+          var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+          var pieData        = {
+            labels: [
+            'Chrome', 
+            'IE',
+            'FireFox', 
+            'Safari', 
+          
+            ],
+            datasets: [
+          {
+            data: [700,500,400,600,300,100],
+            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          }
+            ]
+          }
+          var pieOptions     = {
+            legend: {
+          display: false
+            }
+          }
+          //Create pie or douhnut chart
+          // You can switch between pie and douhnut using the method below.
+          var pieChart = new Chart(pieChartCanvas, {
+            type: 'doughnut',
+            data: pieData,
+            options: pieOptions      
+          })
+        
+      </script>
+  </div>
+   <!--fin pie chart1 -->
+   <div class="col-sm-8">
+   
 
-        <div class="col-12 col-xl-4 mb-4">
-            <div class="col-12 px-0 mb-4">
-                <div class="card border-light shadow-sm">
-                    <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
-                        <div class="d-block">
-                            <div class="h6 fw-normal text-gray mb-2">Total orders</div>
-                            <h2 class="h3">452</h2>
-                            <div class="small mt-2">                               
-                                <span class="fas fa-angle-up text-success"></span>                                   
-                                <span class="text-success fw-bold">18.2%</span>
-                            </div>
-                        </div>
-                        <div class="d-block ms-auto">
-                            <div class="d-flex align-items-center text-right mb-2">
-                                <span class="shape-xs rounded-circle bg-dark me-2"></span>
-                                <span class="fw-normal small">July</span>
-                            </div>
-                            <div class="d-flex align-items-center text-right">
-                                <span class="shape-xs rounded-circle bg-secondary me-2"></span>
-                                <span class="fw-normal small">August</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body p-2">
-                        <div class="ct-chart-ranking ct-golden-section ct-series-a"></div>
-                    </div>
+    <div class="card bg-secondary-alt shadow-sm">
+        <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+            <div class="d-block mb-3 mb-sm-0">
+                <div class="h5 fw-normal mb-2">Mes restants du mois</div>
+                <h2 class="h3">$10,567</h2>
+                <div class="small mt-2"> 
+                    <span class="fw-bold me-2">Yesterday</span>                              
+                    <span class="fas fa-angle-up text-success"></span>                                   
+                    <span class="text-success fw-bold">10.57%</span>
                 </div>
             </div>
+            <div class="d-flex ms-auto">
+                <a href="#" class="btn btn-secondary text-dark btn-sm me-2">Month</a>
+                
+            </div>
+        </div>
+        <div class="card-body p-2">
+            <div class="ct-chart-sales-value ct-double-octave ct-series-g"></div>
+        </div>
 
 
-        </div>                        
+
 
     </div>
+
+</div>
 </body>
 </html>
 
@@ -213,4 +185,3 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}{% endblock javascripts %}
-

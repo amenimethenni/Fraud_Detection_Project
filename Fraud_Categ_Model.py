@@ -13,6 +13,7 @@ import pickle
 
 df = pd.read_csv('C:/fraudTrain.csv')
 
+
 def PreprocessingFraud(df):
     df['trans_date_trans_time'] = pd.to_datetime(df['trans_date_trans_time'])
     df['year'] = df['trans_date_trans_time'].dt.year
