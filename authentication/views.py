@@ -10,6 +10,7 @@ from django.forms.utils import ErrorList
 from django.http import HttpResponse
 from .forms import LoginForm, SignUpForm
 
+
 def login_view(request):
     form = LoginForm(request.POST or None)
 
@@ -57,3 +58,20 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
+
+
+###########ListeUser##############""
+from django.contrib.auth import get_user_model
+
+def users(request):
+
+    User = get_user_model()
+    users = User.objects.all()    
+    
+    context = {'users': users }
+
+    return render(request, 'ui-notifications.html',context)
+
+
+
+

@@ -70,45 +70,50 @@
 
   <div class="card card-body shadow-sm table-wrapper table-responsive">
     <div class="card-header card-header-primary">
-        <p class="card-category"><h3 style="color:rgba(9, 5, 116, 0.904)">Historiques des transactions des clients</h3>
+        <p class="card-category"><h3 style="color:rgba(9, 5, 116, 0.904)">Liste des transactions frauduleuses</h3>
     </div>
       <table class="table table-hover">
 
           <thead bgcolor="lightgray">
               <tr>
-                  
+                  <th>ID</th>
                   <th>Nom utilisateur</th>
                   <th>Email</th>
-                  <th>Transactions</th>				
+                  <th>Action</th>				
                                 
                  
               </tr>
           </thead>
           <tbody>
         
-            {% for i in users %}
+   
 
-            <tr>                
-                  
-                  <td>{{i.username}}</td>     
-                  <td>{{i.email}}</td> 
-                  <td>  <div class="d-grid"><button id="myBtn" class="btn btn-dark">Détailles</button></div> </td>
+            <tr>
+                 
+                  <td></td>
+                  <td></td>     
+                  <td></td> 
+                  <td>   
+                  <div class="d-grid">
 
+                    
+ <button id="myBtn" class="btn btn-dark">Détailles</button>
+
+                    
+
+                 </div>
+                 </td>
             </tr>
-            {% endfor %}
-            
 
                 
           </tbody>
       </table>
-    
 
       <div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
+
       </div>
   </div>
   </div>
-
-<!--fin tab users-->
 
   <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -127,37 +132,24 @@
             <thead bgcolor="lightgray">
                 <tr>
                     
-                  <th>Date transaction</th>
-                  <th>marchand</th>	
-                  <th>categorie</th>				
-                  <th>Montant</th> 
+                    <th>Date transaction</th>
+                    <th>categorie</th>				
+                    <th>Montant</th>                 
+                    <th>Etat</th>
                 </tr>
             </thead>
             <tbody>
           
-              {% for j in listetransactions %}
+          
   
               <tr>
                    
-                <td> {{j.year}}-{{j.month}}-{{j.day}}</td>
-                <td>{{j.merchant}} </td>   
-                {% if j.category != None  %}
-                 
-              <td>
-              {{j.category}}
-              </td>
-
-              {% elif j.category == None  and  j.category_pred != None %}
-              <td>
-                {{j.category_pred}}
-              </td>
-            
-            {% endif %}        
-                <td> {{j.amt}}</td> 
-                 
+                    <td></td>
+                    <td></td>     
+                    <td> </td> 
+                    <td></td>  
                    
               </tr>
-              {% endfor %}
   
                   
             </tbody>
@@ -167,10 +159,10 @@
   
         </div>
     </div>
-   
-  </div>
-</div>
 
+ </div>
+
+</div>
 
 <script>
 // Get the modal
@@ -201,12 +193,13 @@ window.onclick = function(event) {
 </script>
 
 
-   
-<!--Nbrs transact frauduleuses -->
+
+
+<!--Pie chart-->
 
   <div class="col-sm-4">
 
-    <h3 style="color:rgba(9, 5, 116, 0.904)">Nombres des clients</h3>
+    <h3 style="color:rgba(9, 5, 116, 0.904)">Nombres des transactions</h3>
                     
     <div class="chart-responsive" style="width:50%">
         <canvas id="pieChart" height="20"></canvas>
@@ -222,14 +215,14 @@ window.onclick = function(event) {
   var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
   var pieData        = {
     labels: [
-    'Hommes', 
-    'Femmes',
+    'Transactions Non frauduleuses', 
+    'Transactions Frauduleuses',
     
     ],
     datasets: [
   {
     data: [700,500],
-    backgroundColor : ['#3c8dbc', '#F3E6E1'],
+    backgroundColor : ['#3c8dbc', '#FF0000'],
   }
     ]
   }
@@ -247,10 +240,10 @@ window.onclick = function(event) {
     options: pieOptions      
   })
 </script>
-</div>
 
 
-  
+
+
 
 </body>
 

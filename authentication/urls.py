@@ -6,11 +6,19 @@ from django.contrib import admin
 from transactiions.views import * 
 
 
+
+from authentication.views import *
+
+
 urlpatterns = [
     path('login/', login_view, name="login"),
     path('register/', register_user, name="register"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path('transactions/', ListeTransactions, name="transactions"),
+
+
+    path('users/', users, name="users"),
+
 
 
    
