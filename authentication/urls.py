@@ -4,7 +4,7 @@ from .views import login_view, register_user
 from django.contrib.auth.views import LogoutView
 from django.contrib import admin
 from transactiions.views import * 
-
+from comptess.views import *
 
 
 from authentication.views import *
@@ -18,6 +18,9 @@ urlpatterns = [
 
 
     path('users/', users, name="users"),
+    path('dashboard/', dashboard, name="dashboard"),
+    path('listetransactFraud/',listetransactFraud,name ="listetransactFraud"),
+
 
 
 

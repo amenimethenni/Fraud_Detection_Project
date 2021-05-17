@@ -136,16 +136,12 @@
                   <th>Montant</th> 
                 </tr>
             </thead>
-            <tbody>
-          
-              {% for j in listetransactions %}
-  
-              <tr>
-                   
+            <tbody>          
+              {% for j in listetransactions %}  
+              <tr>                   
                 <td> {{j.year}}-{{j.month}}-{{j.day}}</td>
                 <td>{{j.merchant}} </td>   
-                {% if j.category != None  %}
-                 
+                {% if j.category != None  %}                 
               <td>
               {{j.category}}
               </td>

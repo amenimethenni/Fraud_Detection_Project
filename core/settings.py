@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'transactiions',
     'comptess',
     'Cartes_Creditss',
-    'chartit',
+  
    
  
     

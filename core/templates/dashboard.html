@@ -105,8 +105,8 @@
         <div class="col-sm-4" >
           
             
-            <h3><b>Mes catégories</b></h3><br><br>
-            <div class="chart-responsive" style="width:70%">
+            <h3><b>Mes catégories :</b></h3><br><br>
+            <div class="chart-responsive" style="width:100%">
                 <canvas id="pieChart" height="900" ></canvas>
           </div>
         <div class="chart-responsive" style="width:70%">
@@ -120,15 +120,27 @@
           var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
           var pieData        = {
             labels: [
-            'Chrome', 
-            'IE',
-            'FireFox', 
-            'Safari', 
+            'shopping', 
+            'grocery',
+            'misc', 
+            'gas_transport', 
+            'home',
+            'kids_pets',
+            'entertainment',
+            'food_dining',
+            'personal_care',
+            'health_fitness',
+            'travel'
           
             ],
             datasets: [
           {
-            data: [700,500,400,600,300,100],
+            data: [
+
+            {{shopping}},{{grocery}},{{misc}},{{gas_transport}},{{home}},{{kids_pets}},{{entertainment}},{{food_dining}},
+            {{personal_care}},{{health_fitness}},{{travel}}
+        
+        ],
             backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
           }
             ]
@@ -151,13 +163,13 @@
    <!--fin pie chart1 -->
    <div class="col-sm-8">
    
-
+    <h3><b>Mes restants du mois :</b></h3><br><br>
     <div class="card bg-secondary-alt shadow-sm">
         <div class="card-header d-sm-flex flex-row align-items-center flex-0">
-            <div class="d-block mb-3 mb-sm-0">
-                <div class="h5 fw-normal mb-2">Mes restants du mois</div>
+            <div class="d-block mb-4 mb-sm-4">
+                <div class="h4 fw-normal mb-2">Mes restants du mois</div>
                 <h2 class="h3">$10,567</h2>
-                <div class="small mt-2"> 
+                <div class="small mt-4"> 
                     <span class="fw-bold me-2">Yesterday</span>                              
                     <span class="fas fa-angle-up text-success"></span>                                   
                     <span class="text-success fw-bold">10.57%</span>

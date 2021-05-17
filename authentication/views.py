@@ -63,7 +63,9 @@ def register_user(request):
 ###########ListeUser##############""
 from django.contrib.auth import get_user_model
 from transactiions.models import Transactiions
-from django.db.models import Count
+from Cartes_Creditss.models import credit_card
+from comptess.models import Account
+from django.contrib.auth.models import User
 
 def users(request):
 
@@ -71,25 +73,36 @@ def users(request):
     users = User.objects.all()  
 
     ####piechart H&F#########  
-    '''labels = []
-    data = []
-
-    #queryset = Transactiions.objects.order_by('gender')[:2]
-    for city in queryset:
-        labels.append(city.amt)
-        data.append(city.gender)
-    
-    '''
-    #places_count = Transactiions.objects.all().aggregate(Count('gender'))
-
     female_count  =Transactiions.objects.filter(gender='F').count()
     men_count  =Transactiions.objects.filter(gender='M').count()
-   
-    context = {'users': users ,'female_count': female_count,'men_count':men_count }
+
+    ####Liste transaction#########  
+    user = User.objects.get(username=request.user.username)
+
+    ############### Get account For  User Connected ##########################
+
+    account = Account.objects.filter(user=user)
+
+    listCards=[]
+    ListeTransactions=[]
+
+    ############### Get List Of Credit Card ##########################
+    for acc in list(account):
+        listCards.append(credit_card.objects.get(compte=acc))
+
+    ############### Get List Of Transactions ##########################
+
+    for card in listCards:
+      
+        listTrans=Transactiions.objects.filter(CarteCredit=card)
+        for i in listTrans :
+            ListeTransactions.append(i)
+
+    context = {'users': users ,'female_count': female_count,'men_count':men_count  ,'listetransactions': ListeTransactions}
 
 
     return render(request, 'ui-notifications.html',context)
-
+    
 
 
 

@@ -76,9 +76,10 @@
 
           <thead bgcolor="lightgray">
               <tr>
-                  <th>ID</th>
+                  <th>Numéro Carte de Credit</th>
                   <th>Nom utilisateur</th>
                   <th>Email</th>
+                  
                   <th>Action</th>				
                                 
                  
@@ -90,22 +91,24 @@
 
             <tr>
                  
-                  <td></td>
-                  <td></td>     
-                  <td></td> 
-                  <td>   
-                  <div class="d-grid">
+            {% for i in users %}
 
-                    
- <button id="myBtn" class="btn btn-dark">Détailles</button>
+            <tr>                
+              {% for j in ListeTransactions %}
+              <td>{{j.CarteCredit_id}}</td>
+              {% endfor %}
 
-                    
+              <td>{{i.username}}</td>     
+              <td>{{i.email}}</td> 
+           
+              <td>  <div class="d-grid"><button id="myBtn" class="btn btn-dark">Détailles</button></div> </td>
+                 
 
-                 </div>
-                 </td>
             </tr>
+           
+            {% endfor %}
 
-                
+               
           </tbody>
       </table>
 
@@ -133,6 +136,7 @@
                 <tr>
                     
                     <th>Date transaction</th>
+                    <th>marchand</th>
                     <th>categorie</th>				
                     <th>Montant</th>                 
                     <th>Etat</th>
@@ -141,15 +145,41 @@
             <tbody>
           
           
-  
+              {% for i in ListeTransactions %}
+              {% if i.is_fraud == 1   %}
+
               <tr>
                    
-                    <td></td>
-                    <td></td>     
-                    <td> </td> 
-                    <td></td>  
+                <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
+                <td>{{i.merchant}} </td>   
+  
+                {% if i.category != None  %}
                    
-              </tr>
+                <td>
+                {{i.category}}
+                </td>
+  
+                {% elif i.category == None  and  category_pred != None %}
+                <td>
+                  {{i.category_pred}}
+                </td>
+              
+              {% endif %}      
+  
+                           
+                <td> {{i.amt}} </td>  
+          
+  
+               
+             
+                <td>
+                  <p style="color:rgba(224, 15, 68, 0.534)"><b>Frauduleuse</b></p>
+                </td>
+                           
+            
+            </tr>
+            {% endif %} 
+            {% endfor %}
   
                   
             </tbody>
