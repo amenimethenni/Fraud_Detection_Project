@@ -30,7 +30,11 @@ INSTALLED_APPS = [
     'app'  ,# Enable the inner app 
     'transactiions',
     'comptess',
-    'Cartes_Creditss'
+    'Cartes_Creditss',
+    'chartit',
+   
+ 
+    
     
 ]
 

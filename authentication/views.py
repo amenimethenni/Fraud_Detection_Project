@@ -62,13 +62,31 @@ def register_user(request):
 
 ###########ListeUser##############""
 from django.contrib.auth import get_user_model
+from transactiions.models import Transactiions
+from django.db.models import Count
 
 def users(request):
 
     User = get_user_model()
-    users = User.objects.all()    
+    users = User.objects.all()  
+
+    ####piechart H&F#########  
+    '''labels = []
+    data = []
+
+    #queryset = Transactiions.objects.order_by('gender')[:2]
+    for city in queryset:
+        labels.append(city.amt)
+        data.append(city.gender)
     
-    context = {'users': users }
+    '''
+    #places_count = Transactiions.objects.all().aggregate(Count('gender'))
+
+    female_count  =Transactiions.objects.filter(gender='F').count()
+    men_count  =Transactiions.objects.filter(gender='M').count()
+   
+    context = {'users': users ,'female_count': female_count,'men_count':men_count }
+
 
     return render(request, 'ui-notifications.html',context)
 

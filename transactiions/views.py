@@ -34,12 +34,17 @@ def ListeTransactions(request):
             ListeTransactions.append(i)
 
     ####FraudModel############
-    '''pkl_filename = "C:/pickle_modelFraud.pkl"
-    with open(pkl_filename, 'rb') as file:
-        pickle_model = pickle.load(file)
+
+    '''filenameEncoder = "C:/EncoderFraud.sav"
+    with open(filenameEncoder, 'rb') as file:
+        pickle_encoder = pickle.load(file)
+
+    filenameFraud = "C:/PredictionFraud.sav"
+    with open(filenameFraud, 'rb') as file:
+        pickle_fraud = pickle.load(file)
            
     for i in ListeTransactions :
-               
+             
         amt = i.amt
         category = i.category
         hours = i.hours
@@ -54,11 +59,11 @@ def ListeTransactions(request):
         num_data =  [amt,hours,month,unix_time,year,day,city_pop]
         cat_data = [category,dob,gender]
          # Remplacer les valeurs catégoriques par des valeurs numériques
-        le=LabelEncoder()
-        for j in cat_data :
-            cat_data[j]=le.fit_transform(cat_data[j])
+        for i in cat_data:
+            cat_data[i]=pickle_encoder.fit_transform(cat_data[i])
+            
         X_test_prep= [*cat_data, *num_data]
-        Ypredict = pickle_model.predict(X_test_prep)
+        Ypredict = pickle_fraud.predict(X_test_prep)
 
         if Ypredict is not None :
             i.is_fraud_pred = Ypredict'''
@@ -66,6 +71,9 @@ def ListeTransactions(request):
     context = {'listetransactions': ListeTransactions  }
 
     return render(request, 'transactions.html',context)
+
+
+
 
 
 
