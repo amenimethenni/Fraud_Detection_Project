@@ -20,6 +20,8 @@ urlpatterns = [
     path('users/', users, name="users"),
     path('dashboard/', dashboard, name="dashboard"),
     path('listetransactFraud/',listetransactFraud,name ="listetransactFraud"),
+    path('getlisteuser/',getlisteuser,name ="getlisteuser"),
+    
 
 
 

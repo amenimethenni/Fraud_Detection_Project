@@ -79,7 +79,7 @@
 
           <thead bgcolor="lightgray">
               <tr>
-                  
+                <th>Numéro de carte de crédit </th>
                   <th>Nom utilisateur</th>
                   <th>Email</th>
                   <th>Transactions</th>				
@@ -92,10 +92,15 @@
             {% for i in users %}
 
             <tr>                
-                  
-                  <td>{{i.username}}</td>     
-                  <td>{{i.email}}</td> 
-                  <td>  <div class="d-grid"><button id="myBtn" class="btn btn-dark">Détailles</button></div> </td>
+            
+              <td></td>
+            
+
+              <td>{{i.username}}</td>     
+              <td>{{i.email}}</td> 
+           
+              <td>  <div class="d-grid"><button id="myBtn" class="btn btn-dark">Détailles</button></div> </td>
+                 
 
             </tr>
             {% endfor %}
@@ -131,33 +136,54 @@
                 <tr>
                     
                   <th>Date transaction</th>
-                  <th>marchand</th>	
+                  <th>NUMÉRO DE CARTE DE CRÉDIT</th>	
                   <th>categorie</th>				
                   <th>Montant</th> 
                 </tr>
             </thead>
             <tbody>          
-              {% for j in listetransactions %}  
-              <tr>                   
-                <td> {{j.year}}-{{j.month}}-{{j.day}}</td>
-                <td>{{j.merchant}} </td>   
-                {% if j.category != None  %}                 
-              <td>
-              {{j.category}}
-              </td>
+              {% for i in ListeTransactionss %}
+      
 
-              {% elif j.category == None  and  j.category_pred != None %}
-              <td>
-                {{j.category_pred}}
-              </td>
-            
-            {% endif %}        
-                <td> {{j.amt}}</td> 
+          <tr>
                  
-                   
-              </tr>
-              {% endfor %}
-  
+              <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
+              <td>{{i.CarteCredit_id}}</td> 
+              
+              {% if i.category != None  %}
+              <td> {{i.category}}</td>
+              {% elif i.category_pred == 0  and i.category == None %}   
+              <td>Entertainment</td>   
+              {% elif i.category_pred == 1 and i.category == None %}
+              <td>Food_dining</td> 
+              {% elif i.category_pred == 2 and i.category == None %}
+              <td>Gas_transport</td> 
+              {% elif i.category_pred == 3 and i.category == None %}
+              <td>Grocery</td> 
+              {% elif i.category_pred == 4 and i.category == None %}
+              <td>Health_fitness</td> 
+              {% elif i.category_pred == 5 and i.category == None %}
+              <td>Home</td> 
+              {% elif i.category_pred == 6 and i.category == None %}
+              <td>kids_pets</td> 
+              {% elif i.category_pred == 7 and i.category == None  %}
+              <td>Misc</td> 
+              {% elif i.category == 8 and i.category == None %}
+              <td>Personal_care</td> 
+              {% elif i.category_pred == 9 and i.category == None %}
+              <td>Shopping</td> 
+              {% elif i.category_pred == 10 and i.category == None  %}
+              <td>Travel</td> 
+                        
+            {% endif %}
+            
+
+            <td>{{i.amt}}</td>         
+
+ 
+          </tr>
+
+    {% endfor %}
                   
             </tbody>
         </table>

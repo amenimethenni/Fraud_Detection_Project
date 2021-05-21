@@ -9,10 +9,7 @@
 <img src="/static/assets/img/team/11.png" alt="banque" width="1300" height="250"><br>
 
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
-    
-    
-   
-   
+
 </div>
 
   <div class="card card-body shadow-sm table-wrapper table-responsive">
@@ -25,64 +22,62 @@
               <tr>
                   
                   <th>Date transaction</th>
-                  <th>marchand</th>	
+                  <th>Numéro de carte de crédit </th>                 
                   <th>categorie</th>				
-                  <th>Montant</th>                 
-                  <th>Etat</th>
-                  <th>Action</th>
+                  <th>Montant</th>   
+                  <th>Actions</th>
               </tr>
           </thead>
           <tbody>
         
-            {% for i in listetransactions %}
+    {% for i in listetransactions %}
 
-            <tr>
+          <tr>
                  
               <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
-              <td>{{i.merchant}} </td>   
-
-              {% if i.category != None  %}
-                 
-              <td>
-              {{i.category}}
-              </td>
-
-              {% elif i.category == None  and  category_pred != None %}
-              <td>
-                {{i.category_pred}}
-              </td>
-            
-            {% endif %}      
-
-                         
-              <td> {{i.amt}} </td>  
+              <td>{{i.CarteCredit_id}}</td> 
               
-            {% if i.is_fraud == 0 %}
-              <td>
-                    <p style="color:rgba(60, 179, 113)"><b>Non Frauduleuse</b></p>
-              </td>
-              {% elif i.is_fraud == 1  %}
-                 
-              <td>
-                <p style="color:rgba(224, 15, 68, 0.534)"><b>Frauduleuse</b></p>
-              </td>
+              {% if i.category != None  %}
+              <td> {{i.category}}</td>
+              {% elif i.category_pred == 0  and i.category == None %}   
+              <td>Entertainment</td>   
+              {% elif i.category_pred == 1 and i.category == None %}
+              <td>Food_dining</td> 
+              {% elif i.category_pred == 2 and i.category == None %}
+              <td>Gas_transport</td> 
+              {% elif i.category_pred == 3 and i.category == None %}
+              <td>Grocery</td> 
+              {% elif i.category_pred == 4 and i.category == None %}
+              <td>Health_fitness</td> 
+              {% elif i.category_pred == 5 and i.category == None %}
+              <td>Home</td> 
+              {% elif i.category_pred == 6 and i.category == None %}
+              <td>kids_pets</td> 
+              {% elif i.category_pred == 7 and i.category == None  %}
+              <td>Misc</td> 
+              {% elif i.category == 8 and i.category == None %}
+              <td>Personal_care</td> 
+              {% elif i.category_pred == 9 and i.category == None %}
+              <td>Shopping</td> 
+              {% elif i.category_pred == 10 and i.category == None  %}
+              <td>Travel</td> 
+                        
+            {% endif %}
 
-              {% elif i.is_fraud_pred == 0  and  i.is_fraud == none %}
-              <td>
-                    <p style="color:rgba(60, 179, 113)"><b>Non Frauduleuse</b></p>
-              </td>
-              {% elif  i.is_fraud_pred == 1 and i.is_fraud == none %}
-                 
-              <td>
-                <p style="color:rgba(224, 15, 68, 0.534)"><b>Frauduleuse</b></p>
-              </td>
-            {% endif %}      
+          <td>{{i.amt}}</td>
+          
+          <td>
+          <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+          <label class="btn btn-outline-danger" for="danger-outlined" onclick="myFunction()">frauduleuse</label>
+          </td>
+      </tr>
+      <script>
+        function myFunction() {
+          confirm("Voulez-vous vraiment réclamer une transaction frauduleuse ! ");
+        }
+        </script>
 
-              <td><input type="checkbox"></td>
-          </tr>
-
-          {% endfor %}
-                
+    {% endfor %}
                 
           </tbody>
       </table>

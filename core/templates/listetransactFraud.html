@@ -65,51 +65,66 @@
    
 </div>
 <div class="row">
-<div class="col-sm-8">
+<div class="col-sm-12">
   
 
   <div class="card card-body shadow-sm table-wrapper table-responsive">
     <div class="card-header card-header-primary">
-        <p class="card-category"><h3 style="color:rgba(9, 5, 116, 0.904)">Liste des transactions frauduleuses</h3>
+        <p class="card-category"><h3 style="color:rgba(207, 4, 55, 0.849)"">Liste des Transactions Frauduleuses</h3>
+
+      
     </div>
       <table class="table table-hover">
 
           <thead bgcolor="lightgray">
               <tr>
-                  <th>Numéro Carte de Credit</th>
-                  <th>Nom utilisateur</th>
-                  <th>Email</th>
-                  
-                  <th>Action</th>				
-                                
+                <th>Date transaction</th>
+                <th>Numéro de carte de crédit </th>
+                <th>marchand</th>	
+                <th>categorie</th>				
+                <th>Montant</th>                 
+           
                  
               </tr>
           </thead>
           <tbody>
-        
-   
+          
+          
+            {% for i in listetransactions %}
+            {% if i.is_fraud == 1  %}
 
             <tr>
                  
-            {% for i in users %}
+              <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
+              <td>{{i.CarteCredit_id }}</td>
+              <td>{{i.merchant}} </td>  
 
-            <tr>                
-              {% for j in ListeTransactions %}
-              <td>{{j.CarteCredit_id}}</td>
-              {% endfor %}
-
-              <td>{{i.username}}</td>     
-              <td>{{i.email}}</td> 
-           
-              <td>  <div class="d-grid"><button id="myBtn" class="btn btn-dark">Détailles</button></div> </td>
+              {% if i.category != None  %}
                  
+              <td>
+              {{i.category}}
+              </td>
 
-            </tr>
-           
-            {% endfor %}
+              {% elif i.category == None  and  category_pred != None %}
+              <td>
+                {{i.category_pred}}
+              </td>
+            
+            {% endif %}      
+
+                         
+              <td> {{i.amt}} </td>  
+   
+          
+          </tr>
+          {% endif %} 
+          {% endfor %}
+
+                
+          </tbody>
 
                
-          </tbody>
+
       </table>
 
       <div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
@@ -117,160 +132,6 @@
       </div>
   </div>
   </div>
-
-  <!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-
-
-    <div class="card card-body shadow-sm table-wrapper table-responsive">
-      <div class="card-header card-header-primary">
-          <p class="card-category"><h3 style="color:rgba(9, 5, 116, 0.904)">Liste des transactions</h3>
-      </div>
-        <table class="table table-hover">
-  
-            <thead bgcolor="lightgray">
-                <tr>
-                    
-                    <th>Date transaction</th>
-                    <th>marchand</th>
-                    <th>categorie</th>				
-                    <th>Montant</th>                 
-                    <th>Etat</th>
-                </tr>
-            </thead>
-            <tbody>
-          
-          
-              {% for i in ListeTransactions %}
-              {% if i.is_fraud == 1   %}
-
-              <tr>
-                   
-                <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
-                <td>{{i.merchant}} </td>   
-  
-                {% if i.category != None  %}
-                   
-                <td>
-                {{i.category}}
-                </td>
-  
-                {% elif i.category == None  and  category_pred != None %}
-                <td>
-                  {{i.category_pred}}
-                </td>
-              
-              {% endif %}      
-  
-                           
-                <td> {{i.amt}} </td>  
-          
-  
-               
-             
-                <td>
-                  <p style="color:rgba(224, 15, 68, 0.534)"><b>Frauduleuse</b></p>
-                </td>
-                           
-            
-            </tr>
-            {% endif %} 
-            {% endfor %}
-  
-                  
-            </tbody>
-        </table>
-  
-        <div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
-  
-        </div>
-    </div>
-
- </div>
-
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-
-
-
-
-<!--Pie chart-->
-
-  <div class="col-sm-4">
-
-    <h3 style="color:rgba(9, 5, 116, 0.904)">Nombres des transactions</h3>
-                    
-    <div class="chart-responsive" style="width:50%">
-        <canvas id="pieChart" height="20"></canvas>
-  </div>
-<div class="chart-responsive" style="width:60%">
-        <canvas id="doughnutChart" height="150"></canvas>
-  </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
-<script>
-  var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
-  var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-  var pieData        = {
-    labels: [
-    'Transactions Non frauduleuses', 
-    'Transactions Frauduleuses',
-    
-    ],
-    datasets: [
-  {
-    data: [700,500],
-    backgroundColor : ['#3c8dbc', '#FF0000'],
-  }
-    ]
-  }
-  var pieOptions     = {
-    legend: {
-  display: false
-    }
-  }
-  //Create pie or douhnut chart
-  // You can switch between pie and douhnut using the method below.
-
-  var pieChart = new Chart(doughnutChartCanvas, {
-    type: 'pie',
-    data: pieData,
-    options: pieOptions      
-  })
-</script>
-
 
 
 

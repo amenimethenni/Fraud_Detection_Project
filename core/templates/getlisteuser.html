@@ -1,0 +1,146 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Transactions {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #cdcdeb;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #btn btn-success {
+  position:absolute;
+  top: 10px;
+  right:0;
+  margin-left: 50%;
+}
+    </style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+    </head>
+    <body>
+
+<img src="/static/assets/img/team/11.png" alt="banque" width="1300" height="250"><br>
+
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    
+    
+   
+   
+</div>
+<div class="row">
+<div class="col-sm-8">
+  
+
+  <div class="card card-body shadow-sm table-wrapper table-responsive">
+    <div class="card-header card-header-primary">
+        <p class="card-category"><h3 style="color:rgba(9, 3, 173, 0.904)">Liste des utilisateurs :</h3>
+            <a href=/register/> 
+            <button type="button" class="btn btn-info" style="float:right">Nouveau Utilisateur</button>
+        </a>
+      
+    </div>
+    
+    
+    
+    
+      <table class="table table-hover">
+        
+
+          <thead bgcolor="lightgray">
+              <tr>
+                <th>Numéro de carte d'identité</th>
+                  <th>Nom </th>
+                  <th>Prénom</th>
+                  <th>Email</th>
+         		
+              </tr>
+          </thead>
+          <tbody>
+
+        
+            {% for i in getlisteuser %}
+
+          
+                      
+       
+            <tr> 
+                       
+                    
+              <td>{{i.username}}</td>     
+              <td>{{i.last_name}}</td>  
+              <td>{{i.first_name}}</td>   
+              <td>{{i.email}}</td> 
+           
+     
+            </tr>
+            {% endfor %}
+         
+            
+
+                
+          </tbody>
+      </table>
+    
+
+      <div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
+      </div>
+  </div>
+  </div>
+
+<!--fin tab users-->
+
+
+</body>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

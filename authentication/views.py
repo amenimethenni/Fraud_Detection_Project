@@ -23,9 +23,15 @@ def login_view(request):
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
             if user is not None:
-                login(request, user)
-                #return redirect("/")
-                return render(request, "dashboard.html", {"form": form})
+                if user.is_superuser :
+                    login(request, user)
+                    #return redirect("/")
+                    return render(request, "ui-notifications.html", {"form": form})
+                else :
+                    login(request, user)
+                    #return redirect("/")
+                    return render(request, "dashboard.html", {"form": form})
+
 
             else:    
                 msg = 'Invalid credentials'    
@@ -47,7 +53,7 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg     = 'User created - please <a href="/login">login</a>.'
+            msg     = 'Utilisateur crée avec succès.'
             success = True
             
             #return redirect("/login/")
@@ -66,12 +72,16 @@ from transactiions.models import Transactiions
 from Cartes_Creditss.models import credit_card
 from comptess.models import Account
 from django.contrib.auth.models import User
+import pickle
+from sklearn.preprocessing import LabelEncoder
+from pandas import DataFrame
+import pandas as pd 
 
 def users(request):
 
     User = get_user_model()
-    users = User.objects.all()  
-
+    users = User.objects.filter(is_superuser = 0) 
+    
     ####piechart H&F#########  
     female_count  =Transactiions.objects.filter(gender='F').count()
     men_count  =Transactiions.objects.filter(gender='M').count()
@@ -82,13 +92,20 @@ def users(request):
     ############### Get account For  User Connected ##########################
 
     account = Account.objects.filter(user=user)
+    accountuser = Account.objects.all()
 
     listCards=[]
     ListeTransactions=[]
 
+    listCardss=[]
+    ListeTransactionss=[]
+
     ############### Get List Of Credit Card ##########################
     for acc in list(account):
         listCards.append(credit_card.objects.get(compte=acc))
+    
+    for acc in list(accountuser):
+        listCardss.append(credit_card.objects.get(compte=acc))
 
     ############### Get List Of Transactions ##########################
 
@@ -98,10 +115,29 @@ def users(request):
         for i in listTrans :
             ListeTransactions.append(i)
 
-    context = {'users': users ,'female_count': female_count,'men_count':men_count  ,'listetransactions': ListeTransactions}
+    
+    for card in listCardss:
+      
+        listTransa=Transactiions.objects.filter(CarteCredit=card)
+        for i in listTransa :
+            ListeTransactionss.append(i)
+
+
+    context = {'users': users ,'female_count': female_count,'men_count':men_count  ,'listetransactions': ListeTransactions,'ListeTransactionss':ListeTransactionss}
 
 
     return render(request, 'ui-notifications.html',context)
+
+####get List user###############
+def getlisteuser (request) :
+    
+    User = get_user_model()
+    getlisteuser = User.objects.filter(is_superuser = 0)
+    context = {'getlisteuser': getlisteuser}
+
+
+    return render(request, 'getlisteuser.html',context)
+
     
 
 
