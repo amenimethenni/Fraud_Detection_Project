@@ -35,8 +35,7 @@
           <tr>
                  
               <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
-              <td>{{i.CarteCredit_id}}</td> 
-              
+              <td>{{i.CarteCredit_id}}</td>  
               {% if i.category != None  %}
               <td> {{i.category}}</td>
               {% elif i.category_pred == 0  and i.category == None %}   
@@ -55,7 +54,7 @@
               <td>kids_pets</td> 
               {% elif i.category_pred == 7 and i.category == None  %}
               <td>Misc</td> 
-              {% elif i.category == 8 and i.category == None %}
+              {% elif i.category_pred == 8 and i.category == None %}
               <td>Personal_care</td> 
               {% elif i.category_pred == 9 and i.category == None %}
               <td>Shopping</td> 
@@ -63,6 +62,7 @@
               <td>Travel</td> 
                         
             {% endif %}
+     
 
           <td>{{i.amt}}</td>
           

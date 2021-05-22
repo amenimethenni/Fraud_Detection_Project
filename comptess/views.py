@@ -81,6 +81,7 @@ def dashboard(request):
 
 
 ################listetransactFraud###########
+
 def listetransactFraud (request):
     User = get_user_model()
     users = User.objects.all()

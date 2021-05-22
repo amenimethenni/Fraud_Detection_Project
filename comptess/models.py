@@ -18,4 +18,6 @@ class Account(models.Model):
     solde = models.FloatField(null=True)
     liste_types_compte= (('compte courant ' ,'compte courant '), ('compte d’épargne' , 'compte d’épargne'))
     type_compte = models.CharField(max_length = 100, null=True , choices = liste_types_compte )
+    #etatCompte = models.BooleanField(default=False )
+
     

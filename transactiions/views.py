@@ -45,76 +45,72 @@ def ListeTransactions(request):
     with open(pkl_filenameCateg, 'rb') as file:
         pickle_modelCateg = pickle.load(file)
 
-    ##dataframe (4 colonnes )
+    ##dataframe 
     dffinal = PreprocessingCateg(df)
     dffinalfraud = PreprocessingFraud(df)
     
     ####liste des transactions
+    alllist=[]
+    alllistfraud=[]
     for i in ListeTransactions :
-        amt = i.amt
-        category = i.category
-        hours = i.hours
-        dob = i.dob
-        month = i.month
-        gender = i.gender
-        unix_time = i.unix_time
-        year = i.year
-        day = i.day
-        city_pop = i.city_pop
-        merchant = i.merchant
+        alllist.append([i.merchant,i.amt,i.dob,i.hours])
+        alllistfraud.append([i.amt,i.category,i.hours,i.dob,i.month,i.gender,i.unix_time, i.year,i.day,i.city_pop])
+    
 
-        ###df CategoryPrediction###
-        listeCategoryPrediction = [merchant,amt,dob,hours]
-        dfCategoryPrediction= DataFrame (listeCategoryPrediction).transpose()
-        dfCategoryPrediction.columns = ['merchant','amt','dob','hours']   
+    newdf = pd.DataFrame(alllist)
+    newdffraud = pd.DataFrame(alllistfraud)
+    newdf.columns = ["merchant","amt","dob","hours"]
+    newdffraud.columns = ['amt','category','hours','dob','month','gender','unix_time', 'year','day','city_pop'] 
+    newdffraud.columns = ['amt','category','hours','dob','month','gender','unix_time', 'year','day','city_pop'] 
+           
+    dffinal = pd.concat([dffinal,newdf], ignore_index=True)
+    dffinalfraud = pd.concat([dffinalfraud,newdffraud], ignore_index=True)
+                 
+    ##labelEncoder 
+    le=LabelEncoder()
+    for i in dffinal :     
+        dffinal['merchant']=le.fit_transform(dffinal['merchant'].astype(str))                
+        dffinal['dob']=le.fit_transform(dffinal['dob'].astype(str)) 
+        #print ('dffinal',dffinal)
 
-         ###df FraudPrediction###
-        listeFraudPrediction = [amt,category,hours,dob,month,gender,unix_time, year,day,city_pop]
-        dffraudPrediction= DataFrame (listeFraudPrediction).transpose()
-        dffraudPrediction.columns = ['amt','category','hours','dob','month','gender','unix_time', 'year','day','city_pop']       
+    ##labelEncoder fraud detection##
+    
+    for i in dffinalfraud :     
+        dffinalfraud['category']=le.fit_transform(dffinalfraud['category'].astype(str))                
+        dffinalfraud['gender']=le.fit_transform(dffinalfraud['gender'].astype(str)) 
+        dffinalfraud['dob']=le.fit_transform(dffinalfraud['dob'].astype(str)) 
         
-        ##Append dfCategoryPrediction to dataframe original####
+
+    ####convert df to list#######
+  
+    newdf=dffinal.tail(len(newdf))
+    new_df_categ = newdf.values.tolist() 
+
+    newdffraud =dffinalfraud.tail(len(newdffraud))
+    new_df_fraud = newdffraud.values.tolist()
+
+
+    ### category Prediction####
+    listpredcat=[]
+    listpredfraud=[]
+    for i in new_df_categ:
+        YpredictCategory = pickle_modelCateg.predict([i])
+        listpredcat.append(YpredictCategory[0])
+
+    for i,j in zip(ListeTransactions,listpredcat):
+        if (i.category is None):
+            i.category_pred=j
+            i.save()
+    
+    ### fraud Prediction####
         
-        dffinal = pd.concat([dffinal,dfCategoryPrediction], ignore_index=True)
+    for i in new_df_fraud:
+        Ypredictfraud = pickle_modelFraud.predict([i])
+        listpredfraud.append(Ypredictfraud[0])
 
-        ##Append dffraudPrediction to dataframe original####
-        
-        dffinalfraud = pd.concat([dffinalfraud,dffraudPrediction], ignore_index=True)
-                
-        ##labelEncoder category prediction##
-        le=LabelEncoder()
-        for i in dffinal :     
-            dffinal['merchant']=le.fit_transform(dffinal['merchant'].astype(str))                
-            dffinal['dob']=le.fit_transform(dffinal['dob'].astype(str)) 
-        print ('dffinal',dffinal)
-
-        ##labelEncoder fraud detection##
-        le=LabelEncoder()
-        for i in dffinalfraud :     
-            dffinalfraud['category']=le.fit_transform(dffinalfraud['category'].astype(str))                
-            dffinalfraud['gender']=le.fit_transform(dffinalfraud['gender'].astype(str)) 
-            dffinalfraud['dob']=le.fit_transform(dffinalfraud['dob'].astype(str)) 
-        print ('dffinalfraud',dffinalfraud)
-
-        ####convert df to list#######
-
-        listefinalcategory = dffinal.values.tolist()  
-        #print('listefinalcategory',listefinalcategory)
-        
-        listefinalFraud = dffinalfraud.values.tolist()  
-        #print('listefinal',listefinalFraud)
-
-        ### category Prediction#####
-        '''YpredictCategory = pickle_modelCateg.predict(listefinalcategory)
-        #print('YpredictCategory',YpredictCategory)        
-        if YpredictCategory is not None   :
-            i.category_pred = YpredictCategory
-
-        ###Fraud detection#####
-        YpredictFraud = pickle_modelFraud.predict(listefinalFraud)
-        #print('YpredictFraud',YpredictFraud)
-        if YpredictFraud is not None :
-            i.is_fraud_pred = YpredictFraud'''
+    for i,j in zip(ListeTransactions,listpredfraud):
+        i.is_fraud_pred=j
+        i.save()
         
             
     context = {'listetransactions': ListeTransactions  }

@@ -95,10 +95,11 @@
 
           <thead bgcolor="lightgray">
               <tr>
+           
                 <th>Numéro de carte d'identité</th>
-                  <th>Nom </th>
-                  <th>Prénom</th>
-                  <th>Email</th>
+                <th>Email</th>
+                <th>date_joint </th>
+                
          		
               </tr>
           </thead>
@@ -107,16 +108,14 @@
         
             {% for i in getlisteuser %}
 
-          
-                      
+                             
        
-            <tr> 
-                       
+            <tr>                       
                     
-              <td>{{i.username}}</td>     
-              <td>{{i.last_name}}</td>  
-              <td>{{i.first_name}}</td>   
-              <td>{{i.email}}</td> 
+              <td>{{i.username}}</td>  
+              <td>{{i.email}}</td>    
+              <td>{{i.date_joined}}</td>   
+               
            
      
             </tr>

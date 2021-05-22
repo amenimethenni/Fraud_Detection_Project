@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
 from .forms import LoginForm, SignUpForm
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def login_view(request):
@@ -22,15 +24,21 @@ def login_view(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
+            ### compte = Compte.objects.get(user=user)
             if user is not None:
                 if user.is_superuser :
                     login(request, user)
                     #return redirect("/")
                     return render(request, "ui-notifications.html", {"form": form})
+                #else :
+                    '''if compte.etatCompte :
+                        print("Compte Bloquée")
+                        msg = "Compte Bloquées"  
+                        return render(request, "accounts/login.html", {"form": form, "msg" : msg})'''
                 else :
-                    login(request, user)
-                    #return redirect("/")
-                    return render(request, "dashboard.html", {"form": form})
+                        login(request, user)
+                        #return redirect("/")
+                        return render(request, "dashboard.html", {"form": form})
 
 
             else:    
@@ -51,8 +59,19 @@ def register_user(request):
             form.save()
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
+            email = form.cleaned_data.get('email')
+     
+            #user = authenticate(username=username, password=raw_password)
 
+
+            send_mail(
+                 'Banque en ligne | Espace client ',
+                'Bonjour , Pour accéder à votre espace bancaire personnel , saisir Votre CIN :  '+username+'  et  votre mot de passe : '+ raw_password +'.   Cordialement.',
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
+                )
+            
             msg     = 'Utilisateur crée avec succès.'
             success = True
             
