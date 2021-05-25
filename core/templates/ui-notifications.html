@@ -90,11 +90,13 @@
           <tbody>
         
             {% for i in users %}
+            {% for j  in listetransactions %}
 
-            <tr>                
-            
-              <td></td>
-            
+            <tr>      
+
+          
+              <td><{{j.CarteCredit_id}}</td>
+              {% endfor %}
 
               <td>{{i.username}}</td>     
               <td>{{i.email}}</td> 
@@ -142,6 +144,7 @@
                 </tr>
             </thead>
             <tbody>          
+            
               {% for i in ListeTransactionss %}
       
 
@@ -225,58 +228,6 @@ window.onclick = function(event) {
 }
 </script>
 
-
-<!--Nbrs transact frauduleuses -->
-
-<div class="col-sm-4">
-
-  <h3 style="color:rgba(9, 5, 116, 0.904)">Nombres des clients</h3>
-                  
-  <div class="chart-responsive" style="width:50%">
-      <canvas id="pieChart" height="20"></canvas>
-</div>
-<div class="chart-responsive" style="width:60%">
-      <canvas id="doughnutChart" height="150"></canvas>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
-<script>
-var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
-var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-var pieData        = {
-  labels: [
-  'Hommes', 
-  'Femmes',
-  
-  ],
-  datasets: [
-{
-  data: [
-  {{ men_count }} ,{{female_count}},
-    
-
-
-  ],
-  backgroundColor : ['#3c8dbc', '#F3E6E1'],
-}
-  ]
-}
-var pieOptions     = {
-  legend: {
-display: false
-  }
-}
-//Create pie or douhnut chart
-// You can switch between pie and douhnut using the method below.
-
-var pieChart = new Chart(doughnutChartCanvas, {
-  type: 'pie',
-  data: pieData,
-  options: pieOptions      
-})
-</script>
-</div>
 
 </body>
 

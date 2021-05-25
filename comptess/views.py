@@ -122,11 +122,15 @@ def listetransactFraud (request):
 def notifications (request) :
     
     
-    user = User.objects.get(username=request.user.username)
+    User = get_user_model()
+    users = User.objects.all()
+
+    ####Liste transaction#########  
+    #user = User.objects.get(username=request.user.username)
 
     ############### Get account For  User Connected ##########################
 
-    account = Account.objects.filter(user=user)
+    account = Account.objects.all()
 
     listCards=[]
     ListeTransactions=[]
@@ -142,32 +146,10 @@ def notifications (request) :
         listTrans=Transactiions.objects.filter(CarteCredit=card)
         for i in listTrans :
             ListeTransactions.append(i)
-
-     # Load FraudModel
-    pkl_filenameFraud = "c:/PredictionFraud.sav"
-    with open(pkl_filenameFraud, 'rb') as file:
-        pickle_modelFraud = pickle.load(file)
-    #Load CategModel
-    pkl_filenameCateg = "c:/pickle_modelcateg.pkl"
-    with open(pkl_filenameCateg, 'rb') as file:
-        pickle_modelCateg = pickle.load(file)
-           
-    for i in ListeTransactions :
-        amt = i.amt
-        category = i.category
-        hours = i.hours
-        dob = i.dob
-        month = i.month
-        gender = i.gender
-        unix_time = i.unix_time
-        year = i.year
-        day = i.day
-        city_pop = i.city_pop
-        merchant = i.merchant
-
-
-            
-    context = {'listetransactions': ListeTransactions  }
-
+    
+    ####detailles transact frauduleuse#########  
+    #fraude  =Transactiions.objects.filter(is_fraud='1').count()
+    #Not_fraud  =Transactiions.objects.filter(is_fraud='0').count()
+    context = {'listetransactions':ListeTransactions , 'users':users}
 
     return render(request, 'navigation.html',context)

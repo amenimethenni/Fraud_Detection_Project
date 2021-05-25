@@ -1,0 +1,146 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link href="styless.css" rel="stylesheet"> 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    /* Create two equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 500px; /* Should be removed. Only for demonstration */
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    </style>
+  
+</head>
+
+<body>
+
+<!--image banque -->
+<img src="/static/assets/img/team/11.png" alt="banque" width="1300" height="250"><br>
+<br> 
+
+ <!--customer , revenue , trafic share-->
+  <h3><b></b></h3><br>     
+  
+  
+  <div class="row">
+    <div class="column" style="background-color:rgb(255, 255, 255);">
+      <h2><h3 style="color:rgba(9, 5, 116, 0.904)">Nombres des clients</h3></h2>
+      <p>
+        <div class="chart-responsive" style="width:30%">
+          <canvas id="pieChart" height="20"></canvas>
+    </div>
+    <div class="chart-responsive" style="width:40%">
+          <canvas id="doughnutChart" height="50"></canvas>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
+    <script>
+    var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var pieData        = {
+      labels: [
+      'Hommes', 
+      'Femmes',
+      
+      ],
+      datasets: [
+    {
+      data: [
+      {{ men_count }} ,{{female_count}},
+        
+    
+    
+      ],
+      backgroundColor : ['#3c8dbc', '#F3E6E1'],
+    }
+      ]
+    }
+    var pieOptions     = {
+      legend: {
+    display: false
+      }
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    
+    var pieChart = new Chart(doughnutChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions      
+    })
+    </script>
+        
+      </p>
+    </div>
+    <div class="column" style="background-color:rgb(255, 255, 255);">
+      <h2><h3 style="color:rgba(9, 5, 116, 0.904)">Nombres des transactions</h3></h2>
+      <p>
+
+
+        <div id="piechart"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Transactions non frauduleuses',  {{ nonfraud_count }}],
+  ['Transactions frauduleuses',  {{ fraud_count }}],
+
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = { 'width':500, 'height':300};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+      
+      
+      
+      </p>
+    </div>
+  </div>
+
+  
+
+
+</body>
+</html>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

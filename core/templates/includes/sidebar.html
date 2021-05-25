@@ -24,6 +24,7 @@
       <ul class="nav flex-column pt-3 pt-md-0">
              
   {% if  user.is_superuser  %}
+
   <li class="nav-item">
     <a href="/" class="nav-link d-flex align-items-center">
      
@@ -31,7 +32,7 @@
     </a>
   </li>
   <li class="nav-item {% if 'dashboard' in segment %} active {% endif %}">
-    <a href="/users/" class="nav-link">
+    <a href="/statistique/" class="nav-link">
       <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
       <span class="sidebar-text">Tableau de bord</span>
     </a>
@@ -63,11 +64,6 @@
 
   <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
 
-
-
-  
-       
-
   {% else %}
 
         <li class="nav-item">
@@ -91,7 +87,7 @@
         </li>
         <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
         <li class="nav-item {% if 'settings' in segment %} active {% endif %}">
-          <a href="/settings.html" class="nav-link">
+          <a href="/getuser/" class="nav-link">
             <span class="sidebar-icon"><span class="far fa-user"></span></span>
             <span class="sidebar-text">Mon profil</span>
           </a>

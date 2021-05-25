@@ -26,85 +26,41 @@
   <div class="row">
       <div class="col-12 col-xl-8">
           <div class="card card-body shadow-sm mb-4">
-              <h2 class="h5 mb-4">General information</h2>
+            <p class="card-category"><h3 style="color:rgba(9, 5, 116, 0.904)">Mon profil</h3><br> <br>
               <form>
                   <div class="row">
                       <div class="col-md-6 mb-3">
                           <div>
-                              <label for="first_name">First Name</label>
-                              <input class="form-control" id="first_name" type="text" placeholder="Enter your first name" required>
+                              <label>Numéro de carte d'identité : <p>{{getuser.username}}</p></label>            
                           </div>
                       </div>
                       <div class="col-md-6 mb-3">
                           <div>
-                              <label for="last_name">Last Name</label>
-                              <input class="form-control" id="last_name" type="text" placeholder="Also your last name" required>
+                            <label>Email : <p>{{getuser.email}}</p></label>   
                           </div>
                       </div>
                   </div>
                   <div class="row align-items-center">
                       <div class="col-md-6 mb-3">
-                          <label for="birthday">Birthday</label>
-                          <div class="input-group">
-                              <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
-                              <input data-datepicker="" class="form-control" id="birthday" type="text" placeholder="dd/mm/yyyy" required>                                               
-                            </div>
+                          <label>Nom : <p>{{getuser.last_name}}</p></label>
+                       
                       </div>
                       <div class="col-md-6 mb-3">
-                          <label for="gender">Gender</label>
-                          <select class="form-select mb-0" id="gender" aria-label="Gender select example">
-                              <option selected>Gender</option>
-                              <option value="1">Female</option>
-                              <option value="2">Male</option>
-                          </select>
+                          <label >Prénom : <p>{{getuser.first_name}}</p></label>
+                        
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-md-6 mb-3">
-                          <div class="form-group">
-                              <label for="email">Email</label>
-                              <input class="form-control" id="email" type="email" placeholder="name@company.com" required>
-                          </div>
+                        <label >Dernière connexion :<p>{{getuser.last_login}}</p></label>
                       </div>
                       <div class="col-md-6 mb-3">
-                          <div class="form-group">
-                              <label for="phone">Phone</label>
-                              <input class="form-control" id="phone" type="number" placeholder="+12-345 678 910" required>
-                          </div>
+                        <label >Date création de la compte :<p>{{getuser.date_joined}}</p></label>
                       </div>
                   </div>
-                  <h2 class="h5 my-4">Location</h2>
-                  <div class="row">
-                      <div class="col-sm-9 mb-3">
-                          <div class="form-group">
-                              <label for="address">Address</label>
-                              <input class="form-control" id="address" type="text" placeholder="Enter your home address" required>
-                          </div>
-                      </div>
-                      <div class="col-sm-3 mb-3">
-                          <div class="form-group">
-                              <label for="number">Number</label>
-                              <input class="form-control" id="number" type="number" placeholder="No." required>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-sm-4 mb-3">
-                          <div class="form-group">
-                              <label for="city">City</label>
-                              <input class="form-control" id="city" type="text" placeholder="City" required>
-                          </div>
-                      </div>
-                      <div class="col-sm-4">
-                          <div class="form-group">
-                              <label for="zip">ZIP</label>
-                              <input class="form-control" id="zip" type="tel" placeholder="ZIP" required>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="mt-3">
-                      <button type="submit" class="btn btn-dark">Save All</button>
-                  </div>
+         
+      
+               
               </form>
           </div>
       
@@ -115,40 +71,22 @@
                   <div class="card shadow-sm text-center p-0">
                       <div class="profile-cover rounded-top" data-background="/static/assets/img/profile-cover.jpg"></div>
                       <div class="card-body pb-5">
-                          <img src="/static/assets/img/team/avatar.png" class="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
-                          <h4 class="h3">
-                            {{ request.user.username }}
-                          </h4>
+                          <img src="/static/assets/img/team/avt.png" class="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
+                      
                           <h5 class="fw-normal">
-                            {{ request.user.email }}
+                            {{ request.user.last_name }}
+                            
+                            {{ request.user.first_name }}
+                            <br>
                           </h5>
+                          <br><br>
                          
                       </div>
                     </div>
               </div>
               <div class="col-12">
-                  <div class="card card-body shadow-sm mb-4">
-                      <h2 class="h5 mb-4">Select profile photo</h2>
-                      <div class="d-flex align-items-center">
-                          <div class="me-3">
-                              <!-- Avatar -->
-                              <div class="user-avatar xl-avatar">
-                                  <img class="rounded" src="/static/assets/img/team/avatar.png" alt="change avatar">
-                              </div>
-                          </div>
-                          <div class="file-field">
-                              <div class="d-flex justify-content-xl-center ms-xl-3">
-                                  <div class="d-flex">
-                                    <span class="icon icon-md"><span class="fas fa-paperclip me-3"></span></span> <input type="file">
-                                    <div class="d-md-block text-left">
-                                        <div class="fw-normal text-dark mb-1">Choose Image</div>
-                                        <div class="text-gray small">JPG, GIF or PNG. Max size of 800K</div>
-                                    </div>
-                                  </div>
-                              </div>
-                            </div>                                        
-                      </div>
-                  </div>
+
+
               </div>
   
           </div>

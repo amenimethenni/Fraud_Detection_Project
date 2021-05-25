@@ -21,6 +21,8 @@ urlpatterns = [
     path('dashboard/', dashboard, name="dashboard"),
     path('listetransactFraud/',listetransactFraud,name ="listetransactFraud"),
     path('getlisteuser/',getlisteuser,name ="getlisteuser"),
+    path('getuser/',getuser,name ="getuser"),
+    path('statistique/',admin,name ="admin"),
     
 
 

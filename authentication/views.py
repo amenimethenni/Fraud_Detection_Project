@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
 from django.conf import settings
+from transactiions.models import Transactiions
 
 
 def login_view(request):
@@ -30,15 +31,17 @@ def login_view(request):
                     login(request, user)
                     #return redirect("/")
                     return render(request, "ui-notifications.html", {"form": form})
-                #else :
-                    '''if compte.etatCompte :
+                else : 
+              
+                    if Transactiions.etat == True:
                         print("Compte Bloquée")
                         msg = "Compte Bloquées"  
-                        return render(request, "accounts/login.html", {"form": form, "msg" : msg})'''
-                else :
+                        return render(request, "accounts/login.html", {"form": form, "msg" : msg})
+                    else  :
                         login(request, user)
                         #return redirect("/")
                         return render(request, "dashboard.html", {"form": form})
+            
 
 
             else:    
@@ -106,11 +109,12 @@ def users(request):
     men_count  =Transactiions.objects.filter(gender='M').count()
 
     ####Liste transaction#########  
-    user = User.objects.get(username=request.user.username)
+    #user = User.objects.get(username=request.user.username)
 
     ############### Get account For  User Connected ##########################
 
-    account = Account.objects.filter(user=user)
+    account = Account.objects.values('user_id')
+    print ("Account",account)
     accountuser = Account.objects.all()
 
     listCards=[]
@@ -121,8 +125,8 @@ def users(request):
 
     ############### Get List Of Credit Card ##########################
     for acc in list(account):
-        listCards.append(credit_card.objects.get(compte=acc))
-    
+        listCards.append(credit_card.objects.values('compte_id'))
+        print('listCards',listCards)
     for acc in list(accountuser):
         listCardss.append(credit_card.objects.get(compte=acc))
 
@@ -130,7 +134,8 @@ def users(request):
 
     for card in listCards:
       
-        listTrans=Transactiions.objects.filter(CarteCredit=card)
+        listTrans = Transactiions.objects.values('CarteCredit_id').distinct()
+        print ("listTrans",listTrans)
         for i in listTrans :
             ListeTransactions.append(i)
 
@@ -140,7 +145,6 @@ def users(request):
         listTransa=Transactiions.objects.filter(CarteCredit=card)
         for i in listTransa :
             ListeTransactionss.append(i)
-
 
     context = {'users': users ,'female_count': female_count,'men_count':men_count  ,'listetransactions': ListeTransactions,'ListeTransactionss':ListeTransactionss}
 
@@ -156,6 +160,78 @@ def getlisteuser (request) :
 
 
     return render(request, 'getlisteuser.html',context)
+
+#########################
+def getuser (request) :
+
+    User = get_user_model()
+    getuser = User.objects.get(username=request.user.username)
+
+    context = {'getuser': getuser}
+    return render(request, 'settings.html',context)
+
+
+###############Admin##############
+
+def admin (request) :
+
+
+    User = get_user_model()
+    users = User.objects.filter(is_superuser = 0) 
+    
+    ####piechart H&F#########  
+    female_count  =Transactiions.objects.filter(gender='F').count()
+    men_count  =Transactiions.objects.filter(gender='M').count()
+
+    fraud_count  =Transactiions.objects.filter(is_fraud ='1').count()
+    nonfraud_count  =Transactiions.objects.filter(is_fraud='0' ).count()
+
+    ####Liste transaction#########  
+    #user = User.objects.get(username=request.user.username)
+
+    ############### Get account For  User Connected ##########################
+
+    account = Account.objects.values('user_id')
+    print ("Account",account)
+    accountuser = Account.objects.all()
+
+    listCards=[]
+    ListeTransactions=[]
+
+    listCardss=[]
+    ListeTransactionss=[]
+
+    ############### Get List Of Credit Card ##########################
+    for acc in list(account):
+        listCards.append(credit_card.objects.values('compte_id'))
+        print('listCards',listCards)
+    for acc in list(accountuser):
+        listCardss.append(credit_card.objects.get(compte=acc))
+
+    ############### Get List Of Transactions ##########################
+
+    for card in listCards:
+      
+        listTrans = Transactiions.objects.values('CarteCredit_id').distinct()
+        print ("listTrans",listTrans)
+        for i in listTrans :
+            ListeTransactions.append(i)
+
+    
+    for card in listCardss:
+      
+        listTransa=Transactiions.objects.filter(CarteCredit=card)
+        for i in listTransa :
+            ListeTransactionss.append(i)
+
+    context = {'users': users ,'female_count': female_count,'men_count':men_count  ,'listetransactions': ListeTransactions,'ListeTransactionss':ListeTransactionss,
+    'fraud_count':fraud_count,'nonfraud_count':nonfraud_count
+    
+    }
+
+
+    return render(request, 'admin.html',context)
+
 
     
 

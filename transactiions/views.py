@@ -1,3 +1,4 @@
+from mmap import ALLOCATIONGRANULARITY
 from os import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
@@ -111,15 +112,18 @@ def ListeTransactions(request):
     for i,j in zip(ListeTransactions,listpredfraud):
         i.is_fraud_pred=j
         i.save()
-        
-            
+        if ((i.is_fraud_pred ==1 ) or (i.is_fraud == 1)):
+            i.etat = True
+            i.save()
+
+    
     context = {'listetransactions': ListeTransactions  }
 
     return render(request, 'transactions.html',context)
 
 
 ###preprocess category prediction##########
-df = pd.read_csv('C:/fraudTest.csv')
+df = pd.read_csv('C:/fraudTest.csv',nrows= 100000 )
 
 def PreprocessingCateg(df):
     df['trans_date_trans_time'] = pd.to_datetime(df['trans_date_trans_time'])
