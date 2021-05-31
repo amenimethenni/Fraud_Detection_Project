@@ -13,9 +13,20 @@ from django.db.models import Sum
 
 
 def dashboard(request):
+    
+    personal_care = 0 
+    shopping = 0
+    grocery = 0
+    misc = 0
+    gas_transport = 0
+    home = 0
+    kids_pets = 0
+    entertainment = 0
+    food_dining = 0
+    health_fitness = 0
+    travel = 0
 
-    User = get_user_model()
-    users = User.objects.all()  
+    
 
     ####Liste transaction#########  
     user = User.objects.get(username=request.user.username)
@@ -38,44 +49,57 @@ def dashboard(request):
         listTrans=Transactiions.objects.filter(CarteCredit=card)
         for i in listTrans :
             ListeTransactions.append(i)
-            
-    
-    items1  =Transactiions.objects.filter(category='shopping')
-    shopping = sum(items1.values_list('amt', flat=True))
 
-    items2  =Transactiions.objects.filter(category='grocery')
-    grocery  =sum(items2.values_list('amt', flat=True))
+    for i in ListeTransactions :
+        
+        if ((i.category == "personal_care") or (i.category_pred == "8")):
+            personal_care = personal_care + i.amt           
+        elif ((i.category == "shopping") or (i.category_pred == "9")):
+            shopping = shopping + i.amt
+        elif ((i.category == "grocery") or (i.category_pred == "3")):
+            grocery = grocery + i.amt
+                    
+        elif ((i.category == "misc") or (i.category_pred == "7")):
+            misc = misc + i.amt
 
-    items3  =Transactiions.objects.filter(category='misc')
-    misc  =sum(items3.values_list('amt', flat=True))
+        elif ((i.category == "gas_transport") or (i.category_pred == "2")):
+            gas_transport = gas_transport + i.amt
+        
+        elif ((i.category == "gas_transport") or (i.category_pred == "2")):
+            gas_transport = gas_transport + i.amt
 
-    items4  =Transactiions.objects.filter(category='gas_transport')
-    gas_transport  =sum(items4.values_list('amt', flat=True))
+        elif ((i.category == "home") or (i.category_pred == "5")):
+            home = home + i.amt
+        elif ((i.category == "kids_pets") or (i.category_pred == "6")):
+            kids_pets = kids_pets + i.amt
+        elif ((i.category == "entertainment") or (i.category_pred == "0")):
+            entertainment = entertainment + i.amt
+        elif ((i.category == "food_dining") or (i.category_pred == "1")):
+            food_dining = food_dining + i.amt
+        elif ((i.category == "travel") or (i.category_pred == "10")):
+            travel = travel + i.amt
+        elif ((i.category == "health_fitness") or (i.category_pred == "4")):
+            health_fitness = health_fitness + i.amt
+        liste =[shopping,grocery,misc,gas_transport,home,kids_pets,entertainment,food_dining,personal_care,health_fitness,travel]
+        listedepenses = (shopping+grocery+misc+gas_transport+home+kids_pets+entertainment+food_dining+personal_care+health_fitness+travel)
 
-    items5  =Transactiions.objects.filter(category='home')
-    home  = sum(items5.values_list('amt', flat=True))
-
-    items6  =Transactiions.objects.filter(category='kids_pets')
-    kids_pets  = sum(items6.values_list('amt', flat=True))
-
-    items7  =Transactiions.objects.filter(category='entertainment')
-    entertainment  =sum(items7.values_list('amt', flat=True))
-
-    items8  =Transactiions.objects.filter(category='food_dining')
-    food_dining   =sum(items8.values_list('amt', flat=True))
-
-    items9  =Transactiions.objects.filter(category='personal_care')
-    personal_care  =sum(items9.values_list('amt', flat=True))
-
-    items10  =Transactiions.objects.filter(category='health_fitness')
-    health_fitness =sum(items10.values_list('amt', flat=True))
-
-    items11  =Transactiions.objects.filter(category='travel')
-    travel  = sum(items11.values_list('amt', flat=True))
+    mt = 0
+    mtt = 0
+    mttt = 0
+    mt5 = 0
+    for i in ListeTransactions :
+        if (i.month == 6):
+            mt = mt + i.amt
+        elif (i.month == 4):
+            mtt = mtt +i.amt
+        elif (i.month == 7) :
+            mttt= mttt +i.amt
+        elif (i.month == 5):
+            mt5=mt5+i.amt
+        li = [mt,mtt,mttt,mt5] 
 
 
-    context = {'shopping':shopping,'grocery':grocery,'misc':misc,'gas_transport':gas_transport,'home':home,'kids_pets':kids_pets,'entertainment':entertainment,
-    'food_dining':food_dining,'personal_care':personal_care,'health_fitness':health_fitness,'travel':travel}
+    context = {'ListeTransactions' : ListeTransactions,'liste':liste,'li':li,'listedepenses':listedepenses}
 
     return render(request, 'dashboard.html',context)
 
@@ -146,10 +170,13 @@ def notifications (request) :
         listTrans=Transactiions.objects.filter(CarteCredit=card)
         for i in listTrans :
             ListeTransactions.append(i)
-    
+        
+  
     ####detailles transact frauduleuse#########  
     #fraude  =Transactiions.objects.filter(is_fraud='1').count()
     #Not_fraud  =Transactiions.objects.filter(is_fraud='0').count()
-    context = {'listetransactions':ListeTransactions , 'users':users}
+
+    a = Transactiions.objects.all()
+    context = {'listetransactions':ListeTransactions , 'users':users ,'a':a}
 
     return render(request, 'navigation.html',context)

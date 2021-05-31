@@ -10,9 +10,7 @@ import pickle
 from sklearn.preprocessing import LabelEncoder
 from pandas import DataFrame
 import pandas as pd
-
-
-
+from django.contrib.auth import logout
 
 def ListeTransactions(request):
 
@@ -112,18 +110,41 @@ def ListeTransactions(request):
     for i,j in zip(ListeTransactions,listpredfraud):
         i.is_fraud_pred=j
         i.save()
-        if ((i.is_fraud_pred ==1 ) or (i.is_fraud == 1)):
+        '''if ((i.is_fraud_pred ==1 ) or (i.is_fraud == 1)):
             i.etat = True
             i.save()
-
-    
+            redirect ("accounts/login.html")'''
     context = {'listetransactions': ListeTransactions  }
 
     return render(request, 'transactions.html',context)
 
 
+def fraudupdate (request):
+    
+    user = User.objects.get(username=request.user.username)
+
+    account = Account.objects.filter(user=user)
+    account.etat = True
+    account.save() 
+    
+  
+
+    return render(request, 'accounts/login.html')
+
+    
+    
+  
+
+
+    
+
+
+
+
+
+
 ###preprocess category prediction##########
-df = pd.read_csv('C:/fraudTest.csv',nrows= 100000 )
+df = pd.read_csv('C:/fraudTest.csv',nrows= 20000 )
 
 def PreprocessingCateg(df):
     df['trans_date_trans_time'] = pd.to_datetime(df['trans_date_trans_time'])
@@ -207,6 +228,10 @@ def PreprocessingFraud(df):
     df = df.drop ('merchant',axis=1)
 
     return df
+
+
+
+
 
 
 

@@ -16,9 +16,7 @@
 
         {% if request.user.is_superuser %}
 
-          {% for i in listetransactions  %}
-           
-             {% if  i.is_fraud == 1   %}
+   
       
         <li class="nav-item dropdown">
        
@@ -64,8 +62,7 @@
         
 
         {% endif %} 
-        {% endfor %} 
-        {% endif %} 
+       
 
     
     
@@ -86,12 +83,12 @@
             </div>
           </a>
           <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-0">
-              <a class="dropdown-item rounded-top fw-bold" href="/settings.html">
-                <span class="far fa-user-circle"></span>My Profile</a>
-              <a class="dropdown-item fw-bold" href="/settings.html"><span class="fas fa-cog"></span>Settings</a>
+              <a class="dropdown-item rounded-top fw-bold" href="/getuser/">
+                <span class="far fa-user-circle"></span>Mon Profil</a>
               <div role="separator" class="dropdown-divider my-0"></div>
+              
               <a class="dropdown-item rounded-bottom fw-bold" href="{% url 'logout' %}">
-                <span class="fas fa-sign-out-alt text-danger"></span>Logout</a>
+                <span class="fas fa-sign-out-alt text-danger"></span>Se déconnecter</a>
           </div>
         </li>
       </ul>

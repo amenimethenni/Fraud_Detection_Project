@@ -11,187 +11,206 @@
 <head>
   <meta charset="utf-8">
   <title>Titre de la page</title>
-  <link href="style.css" rel="stylesheet"> 
+  <link href="styless.css" rel="stylesheet"> 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    /* Create two equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 500px; /* Should be removed. Only for demonstration */
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    </style>
   
 </head>
 
-<body>
+
 
 <!--image banque -->
-<img src="/static/assets/img/team/11.png" alt="banque" width="1300" height="250"><br>
-<br> 
+<img src="/static/assets/img/team/11.png" alt="banque" width="1500" height="250">
 
  <!--customer , revenue , trafic share-->
-  <h3><b></b></h3><br>      
-  <div class="row justify-content-md-center">
- 
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-light shadow-sm">
-                <div class="card-body">
-                    <div class="row d-block d-xl-flex align-items-center">
-                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><span class="fas fa-chart-line"></span></div>
-                            <div class="d-sm-none">
-                                <h2 class="h5">dépenses</h2>
-                                <h3 class="mb-1">345,678</h3>
-                            </div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h2 class="h5">Mes dépenses</h2>
-                                <h3 class="mb-1">345 TND</h3>
-                            </div>
-                            <small>Feb 1 - Apr 1,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> WorldWide</small> 
-                            <div class="small mt-2">                               
-                                <span class="fas fa-angle-up text-success"></span>                                   
-                                <span class="text-success fw-bold">18.2%</span> Since last month
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-light shadow-sm">
-                <div class="card-body">
-                    <div class="row d-block d-xl-flex align-items-center">
-                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="icon icon-shape icon-md icon-shape-secondary rounded me-4"><span class="fas fa-cash-register"></span></div>
-                            <div class="d-sm-none">
-                                <h2 class="h5">Revenue</h2>
-                                <h3 class="mb-1">$43,594</h3>
-                            </div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h2 class="h5">Mes Revenues</h2>
-                                <h3 class="mb-1">43,594 TND</h3>
-                            </div>
-                            <small>Feb 1 - Apr 1,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Worldwide</small>
-                            <div class="small mt-2">                               
-                                <span class="fas fa-angle-up text-success"></span>                                   
-                                <span class="text-success fw-bold">28.2%</span> Since last month
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-light shadow-sm">
-                <div class="card-body">
-                    <div class="row d-block d-xl-flex align-items-center">
-                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="ct-chart-traffic-share ct-golden-section ct-series-a"></div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <h3 class="h5 mb-3">Restant Mois précédent</h3>
-                            <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-secondary me-1"><span class="fas fa-money"></span></span> 0 <a href="#" class="h6">TND</a></h6>
-                            <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-primary me-1"></span></span> 3-05-2021<a href="#" class="h6"></a></h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!--courbe sales values -->
 
-       
-      
-    <!--pie chart -->
-    
-    
-    <div class="row">
-        <div class="col-sm-4" >
-          
-            
-            <h3><b>Mes catégories :</b></h3><br><br>
-            <div class="chart-responsive" style="width:100%">
-                <canvas id="pieChart" height="900" ></canvas>
-          </div>
-        <div class="chart-responsive" style="width:70%">
-                <canvas id="doughnutChart" height="350"></canvas>
-          </div>
-  
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
-      <script>
-          var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
-          var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-          var pieData        = {
-            labels: [
-            'shopping', 
-            'grocery',
-            'misc', 
-            'gas_transport', 
-            'home',
-            'kids_pets',
-            'entertainment',
-            'food_dining',
-            'personal_care',
-            'health_fitness',
-            'travel'
-          
-            ],
-            datasets: [
-          {
-            data: [
+<body style="background-color:rgb(223, 237, 243);>
 
-            {{shopping}},{{grocery}},{{misc}},{{gas_transport}},{{home}},{{kids_pets}},{{entertainment}},{{food_dining}},
-            {{personal_care}},{{health_fitness}},{{travel}}
-        
+    <div class="row" style="background-color:rgb(223, 237, 243); >
+
+        <div class="col-12 mb-4">
+          
+    
+    <p class="card-category"><h3 style="color:rgba(21, 21, 22, 0.904)">Mes dépenses par mois :</h3><br>
+
+
+        <canvas id="myChart" width="300" height="100"></canvas>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [      
+        {% for ListeTransactions in ListeTransactions %} '{{ ListeTransactions.year }}-{{ ListeTransactions.month }}-{{ ListeTransactions.day }}', {% endfor %}
+
+
         ],
-            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-          }
-            ]
-          }
-          var pieOptions     = {
-            legend: {
-          display: false
+        datasets: [{
+            label: 'dépenses par mois',
+            data: 
+                    {{li}}
+            ,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
-          }
-          //Create pie or douhnut chart
-          // You can switch between pie and douhnut using the method below.
-          var pieChart = new Chart(pieChartCanvas, {
-            type: 'doughnut',
-            data: pieData,
-            options: pieOptions      
-          })
-        
-      </script>
-  </div>
-   <!--fin pie chart1 -->
-   <div class="col-sm-8">
-   
-    <h3><b>Mes restants du mois :</b></h3><br><br>
-    <div class="card bg-secondary-alt shadow-sm">
-        <div class="card-header d-sm-flex flex-row align-items-center flex-0">
-            <div class="d-block mb-4 mb-sm-4">
-                <div class="h4 fw-normal mb-2">Mes restants du mois</div>
-                <h2 class="h3">$10,567</h2>
-                <div class="small mt-4"> 
-                    <span class="fw-bold me-2">Yesterday</span>                              
-                    <span class="fas fa-angle-up text-success"></span>                                   
-                    <span class="text-success fw-bold">10.57%</span>
-                </div>
-            </div>
-            <div class="d-flex ms-auto">
-                <a href="#" class="btn btn-secondary text-dark btn-sm me-2">Month</a>
-                
-            </div>
+        }
+    }
+});
+</script>
         </div>
-        <div class="card-body p-2">
-            <div class="ct-chart-sales-value ct-double-octave ct-series-g"></div>
-        </div>
+    </div>
+
+<!--fin courbe-->
+
+
+
+
+  
+<div class="row">
+    <div class="column" style="background-color:rgb(223, 237, 243);">
+      
+  
+      <p class="card-category"><h3 style="color:rgba(18, 18, 19, 0.904)">Mes dépenses par catégories :</h3><br>
+
+     
+
+        <div class="chart-responsive" style="width:65%">
+            <canvas id="pieChart" height="500" ></canvas>
+      </div>
+    <div class="chart-responsive" style="width:70%">
+            <canvas id="doughnutChart" height="300"></canvas>
+      </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A==" crossorigin="anonymous"></script>
+  <script>
+      var doughnutChartCanvas = $('#doughnutChart').get(0).getContext('2d')
+      var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+      var pieData        = {
+        labels: [
+        'shopping', 
+        'grocery',
+        'misc', 
+        'gas_transport', 
+        'home',
+        'kids_pets',
+        'entertainment',
+        'food_dining',
+        'personal_care',
+        'health_fitness',
+        'travel'
+      
+        ],
+        datasets: [
+      {
+        data: 
+
+       {{liste}}
+    
+    ,
+        backgroundColor : ['#d2d6de','#87CEFA','#00c0ef' ,'#00a65a', '#f39c12', '#3c8dbc','#2AD4D8','#F3F3F3','#FF5733','#3382FF','A12AD8'],
+      }
+        ]
+      }
+      var pieOptions     = {
+        legend: {
+      display: false
+        }
+      }
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      var pieChart = new Chart(pieChartCanvas, {
+        type: 'doughnut',
+        data: pieData,
+        options: pieOptions      
+      })
+    
+  </script>
 
 
 
 
     </div>
 
-</div>
-</body>
-</html>
+
+
+
+
+
+
+
+    <div class="column" style="background-color: rgb(223, 237, 243);">
+      
+  
+      <p class="card-category"><h3 style="color:rgba(10, 10, 10, 0.904)">
+        Cumul des dépenses budgétisées :</h3><br><br><br>
+
+      
+            <div class="card-body"></div>
+                <div class="row d-block d-xl-flex align-items-center">
+                    <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                      <div class="ct-chart-traffic-share ct-golden-section ct-series-a"></div>                           
+                    
+                    </div>
+                    <div class="col-14 col-xl-7 px-xl-0">
+                      
+                            <h3 class="mb-1">{{listedepenses}} TND</h3>
+                     
+                    </div>
+                </div>
+            
+        </div>
+
+      
+      
+      
+      </p>
+    </div>
+  </div>
+
+
+
+
+
 
 {% endblock content %}
 

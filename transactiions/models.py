@@ -26,4 +26,3 @@ class Transactiions(models.Model):
     #liste_etats= (('En traitement' , 'En traitement'), ('Traitée' , 'Traitée'))
     #etat = models.CharField(max_length = 100, null=True , choices = liste_etats )
     #Status = models.CharField(max_length = 100, null=True )
-    etat= models.BooleanField(default=False )

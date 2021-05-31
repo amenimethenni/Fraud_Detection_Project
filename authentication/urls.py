@@ -8,6 +8,7 @@ from comptess.views import *
 
 
 from authentication.views import *
+from authentication import views
 
 
 urlpatterns = [
@@ -23,7 +24,7 @@ urlpatterns = [
     path('getlisteuser/',getlisteuser,name ="getlisteuser"),
     path('getuser/',getuser,name ="getuser"),
     path('statistique/',admin,name ="admin"),
-    
+    path ('detailles/<int:pk>/',detail,name="detail"),    
 
 
 

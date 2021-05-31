@@ -1,0 +1,172 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Transactions {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #cdcdeb;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #btn btn-success {
+  position:absolute;
+  top: 10px;
+  right:0;
+  margin-left: 50%;
+}
+    </style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+    </head>
+    <body>
+
+<img src="/static/assets/img/team/11.png" alt="banque" width="1300" height="250"><br>
+
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    
+    
+   
+   
+</div>
+<div class="row">
+<div class="col-sm-8">
+  
+
+  <div class="card card-body shadow-sm table-wrapper table-responsive">
+    <div class="card-header card-header-primary">
+        <p class="card-category"><h3 style="color:rgba(9, 3, 173, 0.904)">Liste des transactions :</h3>
+            <a href=/users/> 
+            <button type="button" class="btn btn-info" style="float:right">Retour</button>
+        </a>
+      
+    </div>
+    
+    
+    
+    
+      <table class="table table-hover">
+        
+
+          <thead bgcolor="lightgray">
+              <tr>
+           
+                <th>Date transaction</th>                
+                <th>categorie</th>				
+                <th>Montant</th>   
+                
+         		
+              </tr>
+          </thead>
+          <tbody>
+
+        
+            {% for i in t %}
+
+                             
+       
+            <tr>                       
+                    
+              <td> {{i.year}}-{{i.month}}-{{i.day}}</td>
+              {% if i.category != None  %}
+              <td> {{i.category}}</td>
+              {% elif i.category_pred == '0'  and i.category == None %}   
+              <td>Entertainment</td>   
+              {% elif i.category_pred == '1' and i.category == None %}
+              <td>Food_dining</td> 
+              {% elif i.category_pred == '2' and i.category == None %}
+              <td>Gas_transport</td> 
+              {% elif i.category_pred == '3' and i.category == None %}
+              <td>Grocery</td> 
+              {% elif i.category_pred == '4' and i.category == None %}
+              <td>Health_fitness</td> 
+              {% elif i.category_pred == '5' and i.category == None %}
+              <td>Home</td> 
+              {% elif i.category_pred == '6' and i.category == None %}
+              <td>kids_pets</td> 
+              {% elif i.category_pred == '7' and i.category == None  %}
+              <td>Misc</td> 
+              {% elif i.category_pred == '8' and i.category == None %}
+              <td>Personal_care</td> 
+              {% elif i.category_pred == '9' and i.category == None %}
+              <td>Shopping</td> 
+              {% elif i.category_pred == '10' and i.category == None  %}
+              <td>Travel</td> 
+                        
+            {% endif %}
+          
+
+            <td>{{i.amt}}</td>
+               
+           
+     
+            </tr>
+            {% endfor %}
+         
+            
+
+                
+          </tbody>
+      </table>
+    
+
+      <div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
+      </div>
+  </div>
+  </div>
+
+<!--fin tab users-->
+
+
+</body>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

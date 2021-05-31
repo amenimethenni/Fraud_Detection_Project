@@ -1,5 +1,6 @@
 
 
+from transactiions.views import ListeTransactions
 from django.shortcuts import render
 
 # Create your views here.
@@ -12,6 +13,15 @@ from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
 from django.conf import settings
 from transactiions.models import Transactiions
+from comptess.models import Account
+
+
+def fraudupdate (request):
+    
+    user = User.objects.all()
+    account = Account.objects.filter(user=user)
+    account.etat = True
+    account.save() 
 
 
 def login_view(request):
@@ -32,8 +42,7 @@ def login_view(request):
                     #return redirect("/")
                     return render(request, "ui-notifications.html", {"form": form})
                 else : 
-              
-                    if Transactiions.etat == True:
+                    if Account.etatCompte == True: 
                         print("Compte Bloquée")
                         msg = "Compte Bloquées"  
                         return render(request, "accounts/login.html", {"form": form, "msg" : msg})
@@ -69,7 +78,7 @@ def register_user(request):
 
             send_mail(
                  'Banque en ligne | Espace client ',
-                'Bonjour , Pour accéder à votre espace bancaire personnel , saisir Votre CIN :  '+username+'  et  votre mot de passe : '+ raw_password +'.   Cordialement.',
+                'Bonjour , Pour accéder à votre espace bancaire personnel , Entrer votre CIN comme nom utilisateur, Votre mot de passe est : '+ raw_password +'.   Cordialement.',
                 settings.EMAIL_HOST_USER,
                 [email],
                 fail_silently=False,
@@ -92,7 +101,7 @@ def register_user(request):
 from django.contrib.auth import get_user_model
 from transactiions.models import Transactiions
 from Cartes_Creditss.models import credit_card
-from comptess.models import Account
+
 from django.contrib.auth.models import User
 import pickle
 from sklearn.preprocessing import LabelEncoder
@@ -108,45 +117,38 @@ def users(request):
     female_count  =Transactiions.objects.filter(gender='F').count()
     men_count  =Transactiions.objects.filter(gender='M').count()
 
-    ####Liste transaction#########  
-    #user = User.objects.get(username=request.user.username)
 
     ############### Get account For  User Connected ##########################
 
     account = Account.objects.values('user_id')
-    print ("Account",account)
+    #print ("Account",account)
     accountuser = Account.objects.all()
 
     listCards=[]
     ListeTransactions=[]
 
-    listCardss=[]
-    ListeTransactionss=[]
+  
 
     ############### Get List Of Credit Card ##########################
     for acc in list(account):
         listCards.append(credit_card.objects.values('compte_id'))
-        print('listCards',listCards)
-    for acc in list(accountuser):
-        listCardss.append(credit_card.objects.get(compte=acc))
+        #print('listCards',listCards)
+ 
 
     ############### Get List Of Transactions ##########################
 
     for card in listCards:
       
         listTrans = Transactiions.objects.values('CarteCredit_id').distinct()
-        print ("listTrans",listTrans)
+        #print ("listTrans",listTrans)
         for i in listTrans :
             ListeTransactions.append(i)
 
-    
-    for card in listCardss:
-      
-        listTransa=Transactiions.objects.filter(CarteCredit=card)
-        for i in listTransa :
-            ListeTransactionss.append(i)
+ 
+    #t = Transactiions.objects.all()
+    cc = credit_card.objects.all()
 
-    context = {'users': users ,'female_count': female_count,'men_count':men_count  ,'listetransactions': ListeTransactions,'ListeTransactionss':ListeTransactionss}
+    context = {'users': users ,'female_count': female_count,'men_count':men_count  ,'listetransactions': ListeTransactions,'cc':cc}
 
 
     return render(request, 'ui-notifications.html',context)
@@ -233,7 +235,22 @@ def admin (request) :
     return render(request, 'admin.html',context)
 
 
+def detail (request , pk):
+
+    cc = credit_card.objects.get(pk=pk)
     
+
+    t = Transactiions.objects.filter(CarteCredit = cc)
+    
+    context = {'t': t}
+
+    return render(request, 'detailles.html',context)
+
+#####
+
+
+
+
 
 
 

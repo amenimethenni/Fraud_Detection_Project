@@ -73,39 +73,45 @@
 
   <div class="card card-body shadow-sm table-wrapper table-responsive">
     <div class="card-header card-header-primary">
-        <p class="card-category"><h3 style="color:rgba(9, 5, 116, 0.904)">Historiques des transactions des clients</h3>
+      <p class="card-category"><h3 style="color:rgba(9, 3, 173, 0.904)">Historiques des opérations des clients :</h3>
     </div>
       <table class="table table-hover">
 
           <thead bgcolor="lightgray">
               <tr>
-                <th>Numéro de carte de crédit </th>
-                  <th>Num CIN</th>
-                  <th>Email</th>
-                  <th>Transactions</th>				
+                  
+                  <th>CIN </th>
+                  <th>Email </th>
+                
+                  <th> Numéro de carte de crédit </th>		
+                  <th>Transactions</th>		
                                 
                  
               </tr>
           </thead>
           <tbody>
         
-            {% for i in users %}
-            {% for j  in listetransactions %}
+            {% for j  in cc %}
 
             <tr>      
 
           
-              <td><{{j.CarteCredit_id}}</td>
-              {% endfor %}
+                        
+              <td>{{j.compte.user.username}}</td>     
+              <td>{{j.compte.user.email}}</td> 
+              <td>{{j.num_Carte_Credit }}</td>  
 
-              <td>{{i.username}}</td>     
-              <td>{{i.email}}</td> 
+              <td>
            
-              <td>  <div class="d-grid"><button id="myBtn" class="btn btn-dark">Détailles</button></div> </td>
-                 
+              
+              <a href="{% url 'detail'  j.pk %}"  type="button" class="btn btn-info" style="float:right">Détailles  </a>
+            
+              </td>
 
             </tr>
+
             {% endfor %}
+           
             
 
                 
